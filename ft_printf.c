@@ -6,7 +6,7 @@
 /*   By: matt <maquentr@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 12:05:52 by matt              #+#    #+#             */
-/*   Updated: 2021/08/22 21:25:27 by matt             ###   ########.fr       */
+/*   Updated: 2021/09/06 15:54:46 by maquentr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,37 +40,6 @@ int		ft_check_prec_null_long(t_args *args, long d) //permet d'afficher %.i avec 
 		return (1);
 	return (0);
 }
-/*
-   int		ft_all_check(t_args *args, int d)
-   {
-   if (args->has_width && args->has_prec && d ==0 && (args->prec == -1 || args->prec == 0))
-   args->prec_null = 1; //pour %5.0i et 5.i   avec i = 0
-   if (args->has_width == -1 && d == 0)
-   args->res += ft_putchar('0');
-   if (args->has_width && args->width == 1 && d != 0)
-   {
-   args->has_width = 0;
-   args->width = -1;
-   }
-   if (!args->has_star_width && args->has_star_prec && args->star_prec < 0 && d == 0)
-   {
-   args->res += ft_putchar('0');
-   return (args->res);
-   }
-   if (args->has_prec && args->prec == -1 && d == 0 && args->has_star_width && args->star_width > -1) // pour %*.d -2,0
-   {
-   while (args->wid-- > 0)
-   args->res += ft_putchar(' ');
-   return (args->res);
-   }
-   if ((args->width > 0 || args->star_width > 0) && (args->has_prec || args->has_star_prec) &&
-   (args->prec == 0 || args->star_prec == 0) && d == 0) // pour %*.*d  -2, 0, 5
-   }
- */
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//
-//
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void	aff_args(t_args *args)
 {
 	printf("width = %d\nhas_width = %d\nprec = %d\nhas_prec = %d\nminus = %d\nhas_zero = %d\nzero = %d\nhas_star_width = %d\nstar_width = %d\nhas_star_prec = %d\nstar_prec = %d\npercent = %d\nwid = %d\nprecision = %d\npadding = %d\nlen = %d\nprec_null = %d\na = %d\n\n\n\n",
@@ -96,7 +65,6 @@ void	aff_args(t_args *args)
 
 void	init_args(t_args *args)
 {
-	args->c = 0;
 	args->width = -1;
 	args->has_width = 0;
 	args->prec = -1;
@@ -115,7 +83,6 @@ void	init_args(t_args *args)
 	args->padding = 0;
 	args->len = 0;
 	args->prec_null = 0;
-	args->a = 2;
 }
 
 char	*read_minus_zero_minus(t_args *args, char *itr)
@@ -156,30 +123,7 @@ char	*read_minus_zero_minus(t_args *args, char *itr)
 		while (*itr)
 		{
 			init_args(args);
-	//		itr = read_minus_zero_minus(args, itr);
-			//minus
-			if (*itr == '-')
-			{
-				args->minus = 1;
-				itr++;
-			}
-			//zero
-			if (*itr == '0')
-			{
-				args->zero = 1;
-				if (args->minus == 1)
-					args->zero = 0;
-				itr++;
-			}
-			//minus
-			if (*itr == '-')
-			{
-				args->minus = 1;
-				if (args->zero)
-					args->zero = 0;
-				itr++;
-			}
-			
+			itr = read_minus_zero_minus(args, itr);
 			// * width
 			if (*itr == '*')
 			{
@@ -243,41 +187,19 @@ char	*read_minus_zero_minus(t_args *args, char *itr)
 		return (itr);
 	}
 
-
-int testest(int a)
-{
-	a = 4;
-	return (a);
-}
-
-
 //WID EST REMIS A ZERO CAR IL RENTRE DANS LE ELSE DU CHECK STARWIDTH
 void	ft_init_width_prec_starwid_starprec(t_args *args)
 	{
-		args->a = 10000;
 		if (args->has_width)
 		{
-			printf("NON?\n");
 			args->wid = args->width;
-			printf("NONBIS wid = %d\n", args->wid);
-			printf("NONBISbis width = %d\n", args->width);
 		}
-		else
-			args->wid = 0;
 		if (args->has_prec)
 			args->precision = args->prec;
-		else
-			args->precision = 0;
 		if (args->has_star_width)
 			args->wid = args->star_width;
-		else
-			args->wid = 0;
 		if (args->has_star_prec)
 			args->precision = args->star_prec;
-		else
-			args->precision = 0;
-		//	printf("EQEQEQEQwid = %d  precision = %d  width = %d  prec = %d\n", args->wid, args->precision, args->width, args->prec);
-		//	printf("EEQEQEQstarwid = %d  starprecision = %d  star_width = %d  star_prec = %d\n", args->wid, args->precision, args->star_width, args->star_prec);
 	}
 
 
@@ -315,10 +237,6 @@ void	ft_init_width_prec_starwid_starprec(t_args *args)
 		args->len = ft_strlen(tmp);
 		if (ft_check_full_zero_long(args, s))
 			return (0);
-		{
-			args->res +=ft_putstr(tmp);
-			return (args->res);
-		}
 		if (s < 0)
 		{
 			if ((args->len - 1) < args->precision)
@@ -572,7 +490,6 @@ void	ft_init_width_prec_starwid_starprec(t_args *args)
 		base = "0123456789abcdef";
 		if (args->has_width && args->has_prec && (args->prec == -1 || args->prec == 0))
 			args->prec_null = 1; //pour %5.0i et 5.i   avec i = 0
-
 		ft_init_width_prec_starwid_starprec(args);
 		d = (long)va_arg(ap, unsigned int);
 		fautilreturn = ft_check_args_put_x(args, d);
@@ -698,10 +615,7 @@ void	ft_init_width_prec_starwid_starprec(t_args *args)
 		int c;
 
 		c = va_arg(ap, int);
-		if (args->has_star_width)
-			args->wid = args->star_width;
-		else
-			args->wid = 0;
+		ft_init_width_prec_starwid_starprec(args);
 		if (args->minus)
 		{
 			args->res += ft_putchar(c + 0);
@@ -1079,8 +993,6 @@ void	ft_init_width_prec_starwid_starprec(t_args *args)
 		int d;
 
 		ft_init_width_prec_starwid_starprec(args);
-		printf("TG\n");
-		aff_args(args);
 		d = va_arg(ap, int);
 		if (args->has_width && args->has_prec && d ==0 && (args->prec == -1 || args->prec == 0))
 			args->prec_null = 1; //pour %5.0i et 5.i   avec i = 0
@@ -1167,7 +1079,6 @@ void	ft_init_width_prec_starwid_starprec(t_args *args)
 		}
 		while ((args->wid - args->len) > 0)
 		{
-			printf("ALLO?\n");
 			args->res += ft_putchar(' ');
 			args->wid--;
 		}
@@ -1224,15 +1135,3 @@ void	ft_init_width_prec_starwid_starprec(t_args *args)
 		return (res);
 	}
 
-
-
-	int	main()
-	{
-		printf("PR = [%2i]\n", 8);
-		ft_printf("FT = [%2i]\n", 8);
-		int b = 1;
-		b = testest(b);
-		printf("%di\n", b);
-
-		return (0);
-	}
