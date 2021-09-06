@@ -6,7 +6,7 @@
 /*   By: matt <maquentr@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 12:08:04 by matt              #+#    #+#             */
-/*   Updated: 2021/08/17 00:09:49 by matt             ###   ########.fr       */
+/*   Updated: 2021/09/06 18:55:59 by maquentr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,13 +59,31 @@ char	*ft_strjoin(char *s1, char *s2);
 void	getnb(char **result, char *base, long long n, int pos);
 char	*ft_itoa_base(long n, char *base);
 int		ft_nb_dig(char *str);
+
+
 int		ft_printf(const char *format, ...);
+int		ft_put_d_zero(int d, t_args *args);
+int		ft_put_u_zero(unsigned int d, t_args *args);
 
-//PARSING ARGS
-//void	init_args(t_args *args);
-//int	set_minus_zero_minus(t_args *args, char **itr);
-//int	set_starwidh_width(t_args *args, char **itr, va_list ap);
-//int	set_if_digit(t_args *args, char **itr);
-//int	set_prec_starprec_prec(t_args *args, char **itr, va_list ap);
 
+
+//Checkings
+int	ft_check_full_zero(t_args *args, int d);
+int	ft_check_full_zero_long(t_args *args, long d);
+int	ft_check_prec_null_int(t_args *args, int d);
+int	ft_check_prec_null_long(t_args *args, long d);
+
+//SET
+void	ft_set_args_for_specific_tests(t_args *args, int d);
+int		ft_conv_check_args_putchar_return_res(t_args *args, int d);
+void	ft_conv_d_negative(t_args *args, int d);
+int		ft_conv_du_ifzero_ifelse(t_args *args, int d);
+int		ft_conv_du_ifminus(t_args *args, int d);
+
+//ARGS
+void	init_args(t_args *args);
+char	*read_minus_zero_minus(t_args *args, char *itr);
+char	*read_starwidth_width(t_args *args, char *itr, va_list ap);
+char	*read_prec_starprec_prec(t_args *args, char *itr, va_list ap);
+void	ft_init_width_prec_starwid_starprec(t_args *args);
 #endif
