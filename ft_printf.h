@@ -6,7 +6,7 @@
 /*   By: matt <maquentr@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 12:08:04 by matt              #+#    #+#             */
-/*   Updated: 2021/09/06 18:55:59 by maquentr         ###   ########.fr       */
+/*   Updated: 2021/09/21 16:31:16 by matt             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,11 +60,16 @@ void	getnb(char **result, char *base, long long n, int pos);
 char	*ft_itoa_base(long n, char *base);
 int		ft_nb_dig(char *str);
 
-
+//CONV
 int		ft_printf(const char *format, ...);
 int		ft_put_d_zero(int d, t_args *args);
 int		ft_put_u_zero(unsigned int d, t_args *args);
-
+void	ft_conv_d_negative(t_args *args, int d);
+int		ft_conv_d_ifzero_ifelse(t_args *args, int d);
+int		ft_conv_d_ifminus(t_args *args, int d);
+int		ft_conv_u_ifzero_ifelse(t_args *args, unsigned int d);
+int		ft_conv_u_ifminus(t_args *args, unsigned int d);
+int		ft_conv_u_ifzero_ifelse(t_args *args, unsigned int d);
 
 
 //Checkings
@@ -76,9 +81,6 @@ int	ft_check_prec_null_long(t_args *args, long d);
 //SET
 void	ft_set_args_for_specific_tests(t_args *args, int d);
 int		ft_conv_check_args_putchar_return_res(t_args *args, int d);
-void	ft_conv_d_negative(t_args *args, int d);
-int		ft_conv_du_ifzero_ifelse(t_args *args, int d);
-int		ft_conv_du_ifminus(t_args *args, int d);
 
 //ARGS
 void	init_args(t_args *args);

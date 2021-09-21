@@ -6,7 +6,7 @@
 /*   By: matt <maquentr@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 12:05:52 by matt              #+#    #+#             */
-/*   Updated: 2021/09/06 18:55:53 by maquentr         ###   ########.fr       */
+/*   Updated: 2021/09/21 16:34:47 by matt             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -617,45 +617,48 @@ int		ft_put_u(t_args *args, va_list ap)
 	args->len += args->padding;
 	if (args->zero)
 	{
-		if (args->has_prec || args->has_star_prec)
-		{
-			while ((args->wid - args->len) > 0)
-			{
-				args->res += ft_putchar(' ');
-				args->wid--;
-			}
-			args->res += ft_put_u_zero(d, args);
+	//	if (args->has_prec || args->has_star_prec)
+	//	{
+	//		while ((args->wid - args->len) > 0)
+	//		{
+	//			args->res += ft_putchar(' ');
+	//			args->wid--;
+	//		}
+	//		args->res += ft_put_u_zero(d, args);
+	//		return (args->res);
+	//	}
+	//	else
+	//	{
+	//		if (d < 0)
+	//		{
+	//			if ((args->len - 1) < args->wid)
+	//				args->padding = (args->wid - args->len);
+	//			else
+	//				args->padding = 0;
+	//		}
+	//		else
+	//		{
+	//			if (args->len < args->wid)
+	//				args->padding = (args->wid - args->len);
+	//			else
+	//				args->padding = 0;
+	//		}
+	//		args->res += ft_put_u_zero(d, args);
+	//		return (args->res);
+	//	}
+		if (ft_conv_u_ifzero_ifelse(args, d))
 			return (args->res);
-		}
-		else
-		{
-			if (d < 0)
-			{
-				if ((args->len - 1) < args->wid)
-					args->padding = (args->wid - args->len);
-				else
-					args->padding = 0;
-			}
-			else
-			{
-				if (args->len < args->wid)
-					args->padding = (args->wid - args->len);
-				else
-					args->padding = 0;
-			}
-			args->res += ft_put_u_zero(d, args);
-			return (args->res);
-		}
 	}
 	if (args->minus)
 	{
-		args->res += ft_put_u_zero(d, args);
-		while ((args->wid - args->len) > 0)
-		{
-			args->res += ft_putchar(' ');
-			args->wid--;
-		}
-		return (args->res);
+	//	args->res += ft_put_u_zero(d, args);
+	//	while ((args->wid - args->len) > 0)
+	//	{
+	//		args->res += ft_putchar(' ');
+	//		args->wid--;
+	//	}
+	//	return (args->res);
+		return (ft_conv_u_ifminus(args, d));
 	}
 	while ((args->wid - args->len) > 0)
 	{
@@ -794,7 +797,7 @@ int		ft_put_d(t_args *args, va_list ap)
 	//		args->res += ft_put_d_zero(d, args);
 	//		return (args->res);
 	//	}   MIS PAREIL QUEN HAUT  FT_CONV_DU_IFZERO_IFELSE
-		if (ft_conv_du_ifzero_ifelse(args, d))
+		if (ft_conv_d_ifzero_ifelse(args, d))
 			return (args->res);
 	}
 	if (args->minus)
@@ -807,7 +810,7 @@ int		ft_put_d(t_args *args, va_list ap)
 	//	}
 	//	return (args->res);
 	//	SAME QUEN HAUT
-		return (ft_conv_du_ifminus(args, d));
+		return (ft_conv_d_ifminus(args, d));
 	}
 	while ((args->wid - args->len) > 0)
 	{

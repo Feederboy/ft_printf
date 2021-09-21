@@ -6,7 +6,7 @@
 /*   By: maquentr <maquentr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/06 16:58:15 by maquentr          #+#    #+#             */
-/*   Updated: 2021/09/06 18:55:55 by maquentr         ###   ########.fr       */
+/*   Updated: 2021/09/21 16:15:08 by matt             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,70 +48,3 @@ int	ft_conv_check_args_putchar_return_res(t_args *args, int d)
 	}
 	return (0);
 }
-
-void	ft_conv_d_negative(t_args *args, int d)
-{
-	if (d < 0)
-	{
-		if ((args->len - 1) < args->precision)
-			args->padding = (args->precision - (args->len - 1));
-		else
-			args->padding = 0;
-	}
-	else
-	{
-		if (args->len < args->precision)
-			args->padding = (args->precision - args->len);
-		else
-			args->padding = 0;
-	}
-}
-
-
-int		ft_conv_du_ifzero_ifelse(t_args *args, int d)
-{
-		if (args->has_prec || args->has_star_prec)
-		{
-			while ((args->wid - args->len) > 0)
-			{
-				args->res += ft_putchar(' ');
-				args->wid--;
-			}
-			args->res += ft_put_d_zero(d, args);
-			return (1);
-		}
-		else
-		{
-			if (d < 0)
-			{
-				if ((args->len - 1) < args->wid)
-					args->padding = (args->wid - args->len);
-				else
-					args->padding = 0;
-			}
-			else
-			{
-				if (args->len < args->wid)
-					args->padding = (args->wid - args->len);
-				else
-					args->padding = 0;
-			}
-			args->res += ft_put_d_zero(d, args);
-			return (1);
-		}
-}
-
-int		ft_conv_du_ifminus(t_args *args, int d)
-{
-
-	args->res += ft_put_d_zero(d, args);
-	while ((args->wid - args->len) > 0)
-	{
-		args->res += ft_putchar(' ');
-		args->wid--;
-	}
-	return (args->res);
-}
-
-
-

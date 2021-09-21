@@ -6,7 +6,7 @@
 #    By: maquentr <maquentr@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/02 13:05:22 by maquentr          #+#    #+#              #
-#    Updated: 2021/09/06 17:08:20 by maquentr         ###   ########.fr        #
+#    Updated: 2021/09/21 16:29:49 by matt             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 NAME=libftprintf.a
@@ -26,6 +26,9 @@ SRC=ft_printf.c \
 	ft_check_zero_and_prec.c \
 	ft_init_and_read_args.c \
 	ft_conv_check_args.c \
+	ft_conv_d.c \
+	ft_conv_u.c \
+
 
 OBJ=$(SRC:.c=.o)
 
