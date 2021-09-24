@@ -6,7 +6,7 @@
 /*   By: matt <maquentr@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 12:08:04 by matt              #+#    #+#             */
-/*   Updated: 2021/09/21 16:31:16 by matt             ###   ########.fr       */
+/*   Updated: 2021/09/24 15:36:39 by matt             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,13 +63,18 @@ int		ft_nb_dig(char *str);
 //CONV
 int		ft_printf(const char *format, ...);
 int		ft_put_d_zero(int d, t_args *args);
+int		ft_put_p_zero(char *str, t_args *args);
 int		ft_put_u_zero(unsigned int d, t_args *args);
 void	ft_conv_d_negative(t_args *args, int d);
+void	ft_conv_p_negative(t_args *args, long s);
 int		ft_conv_d_ifzero_ifelse(t_args *args, int d);
+int		ft_conv_p_ifzero_ifelse(t_args *args, char *tmp, long s);
 int		ft_conv_d_ifminus(t_args *args, int d);
+int		ft_conv_p_ifminus(t_args *args, char *tmp);
 int		ft_conv_u_ifzero_ifelse(t_args *args, unsigned int d);
 int		ft_conv_u_ifminus(t_args *args, unsigned int d);
 int		ft_conv_u_ifzero_ifelse(t_args *args, unsigned int d);
+
 
 
 //Checkings

@@ -6,7 +6,7 @@
 /*   By: matt <maquentr@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 12:05:52 by matt              #+#    #+#             */
-/*   Updated: 2021/09/21 16:34:47 by matt             ###   ########.fr       */
+/*   Updated: 2021/09/24 15:35:56 by matt             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,62 +95,66 @@ int		ft_put_p(t_args *args, va_list ap)
 	args->len = ft_strlen(tmp);
 	if (ft_check_full_zero_long(args, s))
 		return (0);
-	if (s < 0)
-	{
-		if ((args->len - 1) < args->precision)
-			args->padding = (args->precision - (args->len - 1));
-		else
-			args->padding = 0;
-	}
-	else
-	{
-		if (args->len < args->precision)
-			args->padding = (args->precision - args->len);
-		else
-			args->padding = 0;
-	}
+//	if (s < 0)
+//	{
+//		if ((args->len - 1) < args->precision)
+//			args->padding = (args->precision - (args->len - 1));
+//		else
+//			args->padding = 0;
+//	}
+//	else
+//	{
+//		if (args->len < args->precision)
+//			args->padding = (args->precision - args->len);
+//		else
+//			args->padding = 0;
+//	}
+	ft_conv_p_negative(args, s);
 	args->len += args->padding;
 	if (args->zero)
 	{
-		if (args->has_prec)
-		{
-			while ((args->wid - args->len) > 0)
-			{
-				args->res += ft_putchar(' ');
-				args->wid--;
-			}
-			args->res += ft_put_p_zero(tmp, args);
+	//	if (args->has_prec)
+	//	{
+	//		while ((args->wid - args->len) > 0)
+	//		{
+	//			args->res += ft_putchar(' ');
+	//			args->wid--;
+	//		}
+	//		args->res += ft_put_p_zero(tmp, args);
+	//		return (args->res);
+	//	}
+	//	else
+	//	{
+	//		if (s < 0)
+	//		{
+	//			if ((args->len - 1) < args->wid)
+	//				args->padding = args->wid - args->len;
+	//			else
+	//				args->padding = 0;
+	//		}
+	//		else
+	//		{
+	//			if (args->len < args->wid)
+	//				args->padding = (args->wid - args->len);
+	//			else
+	//				args->padding = 0;
+	//		}
+	//		args->res += ft_put_p_zero(tmp, args);
+	//		return (args->res);
+	//	}
+		if (ft_conv_p_ifzero_ifelse(args, tmp, s))
 			return (args->res);
-		}
-		else
-		{
-			if (s < 0)
-			{
-				if ((args->len - 1) < args->wid)
-					args->padding = args->wid - args->len;
-				else
-					args->padding = 0;
-			}
-			else
-			{
-				if (args->len < args->wid)
-					args->padding = (args->wid - args->len);
-				else
-					args->padding = 0;
-			}
-			args->res += ft_put_p_zero(tmp, args);
-			return (args->res);
-		}
 	}
 	if (args->minus)
 	{
-		args->res += ft_put_p_zero(tmp, args);
-		while ((args->wid - args->len) > 0)
-		{
-			args->res += ft_putchar(' ');
-			args->wid--;
-		}
-		return (args->res);
+	//	args->res += ft_put_p_zero(tmp, args);
+	//	while ((args->wid - args->len) > 0)
+	//	{
+	//		args->res += ft_putchar(' ');
+	//		args->wid--;
+	//	}
+	//	return (args->res);
+		return (ft_conv_p_ifminus(args, tmp));
 	}
 	while ((args->wid - args->len) > 0)
 	{
