@@ -6,7 +6,7 @@
 /*   By: matt <maquentr@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 12:05:52 by matt              #+#    #+#             */
-/*   Updated: 2021/09/24 15:35:56 by matt             ###   ########.fr       */
+/*   Updated: 2021/09/24 17:12:56 by matt             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -190,93 +190,99 @@ int		ft_put_X(t_args *args, va_list ap)
 
 
 	base = "0123456789ABCDEF";
-	if (args->has_width && args->has_prec && (args->prec == -1 || args->prec == 0))
-		args->prec_null = 1; //pour %5.0i et 5.i   avec i = 0
+//	if (args->has_width && args->has_prec && (args->prec == -1 || args->prec == 0))
+//		args->prec_null = 1; //pour %5.0i et 5.i   avec i = 0
 	ft_init_width_prec_starwid_starprec(args);
 	d = (long)va_arg(ap, unsigned int);
-	if (args->has_width == -1 && d == 0)
-		args->res += ft_putchar('0');
-	if (args->has_width && args->width == 1 && d != 0)
-	{
-		args->has_width = 0;
-		args->wid = -1;
-	}
-	if (!args->has_star_width && args->has_star_prec && args->star_prec < 0 && d == 0)
-	{
-		args->res += ft_putchar('0');
+//	if (args->has_width == -1 && d == 0)
+//		args->res += ft_putchar('0');
+//	if (args->has_width && args->width == 1 && d != 0)
+//	{
+//		args->has_width = 0;
+//		args->wid = -1;
+//	}
+//	if (!args->has_star_width && args->has_star_prec && args->star_prec < 0 && d == 0)
+//	{
+//		args->res += ft_putchar('0');
+//		return (args->res);
+//	}
+//	if (args->has_prec && args->prec == -1 && d == 0 && args->has_star_width && args->star_width > -1) // pour %*.d -2,0
+//	{
+//		while (args->wid-- > 0)
+//			args->res += ft_putchar(' ');
+//		return (args->res);
+//	}
+//	if ((args->width > 0 || args->star_width > 0) && (args->has_prec || args->has_star_prec) &&
+//			(args->prec == 0 || args->star_prec == 0) && d == 0) // pour %*.*d  -2, 0, 5
+//		// A METTRE DANS UNE FONCTION ET FAIRE UNE FCT CHECK QUI LES REGROUPE TOUTES
+//	{
+//		while (args->wid-- > 0)
+//			args->res += ft_putchar(' ');
+//		return (args->res);
+//	}
+//	if (args->wid < 0)
+//	{
+//		args->wid *= -1;
+//		args->minus = 1;
+//	}
+	if (ft_set_all_args(args, d))
 		return (args->res);
-	}
-	if (args->has_prec && args->prec == -1 && d == 0 && args->has_star_width && args->star_width > -1) // pour %*.d -2,0
-	{
-		while (args->wid-- > 0)
-			args->res += ft_putchar(' ');
-		return (args->res);
-	}
-	if ((args->width > 0 || args->star_width > 0) && (args->has_prec || args->has_star_prec) &&
-			(args->prec == 0 || args->star_prec == 0) && d == 0) // pour %*.*d  -2, 0, 5
-		// A METTRE DANS UNE FONCTION ET FAIRE UNE FCT CHECK QUI LES REGROUPE TOUTES
-	{
-		while (args->wid-- > 0)
-			args->res += ft_putchar(' ');
-		return (args->res);
-	}
-	if (args->wid < 0)
-	{
-		args->wid *= -1;
-		args->minus = 1;
-	}
 	tmp = ft_itoa_base(d, base);
 	args->len = ft_strlen(tmp);
 	if (ft_check_full_zero(args, d))
 		return (0);
 	if (ft_check_prec_null_long(args, d))
 		return (0);
-	if (d < 0)
-	{
-		if ((args->len - 1) < args->precision)
-			args->padding = (args->precision - (args->len - 1));
-		else
-			args->padding = 0;
-	}
-	else
-	{
-		if (args->len < args->precision)
-			args->padding = (args->precision - args->len);
-		else
-			args->padding = 0;
-	}
+//	if (d < 0)
+//	{
+//		if ((args->len - 1) < args->precision)
+//			args->padding = (args->precision - (args->len - 1));
+//		else
+//			args->padding = 0;
+//	}
+//	else
+//	{
+//		if (args->len < args->precision)
+//			args->padding = (args->precision - args->len);
+//		else
+//			args->padding = 0;
+//	}
+	ft_conv_X_negative(args, d);
 	args->len += args->padding;
 	if (args->zero)
 	{
-		if (args->has_prec || args->has_star_prec)
-		{
-			while ((args->wid - args->len) > 0)
-			{
-				args->res += ft_putchar(' ');
-				args->wid--;
-			}
-			args->res += ft_put_X_zero(tmp, args);
+	//	if (args->has_prec || args->has_star_prec)
+	//	{
+	//		while ((args->wid - args->len) > 0)
+	//		{
+	//			args->res += ft_putchar(' ');
+	//			args->wid--;
+	//		}
+	//		args->res += ft_put_X_zero(tmp, args);
+	//		return (args->res);
+	//	}
+	//	else
+	//	{
+	//		if (d < 0)
+	//			args->padding = (args->len - 1) < args->wid ? (args->wid - (args->len)) : 0;
+	//		else
+	//			args->padding = args->len < args->wid ? (args->wid - args->len) : 0;
+	//		args->res += ft_put_X_zero(tmp, args);
+	//		return (args->res);
+	//	}
+		if (ft_conv_X_ifzero_ifelse(args, tmp, d))
 			return (args->res);
-		}
-		else
-		{
-			if (d < 0)
-				args->padding = (args->len - 1) < args->wid ? (args->wid - (args->len)) : 0;
-			else
-				args->padding = args->len < args->wid ? (args->wid - args->len) : 0;
-			args->res += ft_put_X_zero(tmp, args);
-			return (args->res);
-		}
 	}
 	if (args->minus)
 	{
-		args->res += ft_put_X_zero(tmp, args);
-		while ((args->wid - args->len) > 0)
-		{
-			args->res += ft_putchar(' ');
-			args->wid--;
-		}
-		return (args->res);
+	//	args->res += ft_put_X_zero(tmp, args);
+	//	while ((args->wid - args->len) > 0)
+	//	{
+	//		args->res += ft_putchar(' ');
+	//		args->wid--;
+	//	}
+	//	return (args->res);
+		return (ft_conv_X_ifminus(args, tmp));
 	}
 	while ((args->wid - args->len) > 0)
 	{
@@ -340,6 +346,119 @@ int	ft_check_args_put_x(t_args *args, long d)
 	return (0);
 }
 
+
+int		ft_put_x(t_args *args, va_list ap)
+{
+	long d;
+	char *tmp;
+	char *base;
+
+
+	base = "0123456789abcdef";
+//	if (args->has_width && args->has_prec && (args->prec == -1 || args->prec == 0))
+//		args->prec_null = 1; //pour %5.0i et 5.i   avec i = 0
+	ft_init_width_prec_starwid_starprec(args);
+	d = (long)va_arg(ap, unsigned int);
+//	if (args->has_width == -1 && d == 0)
+//		args->res += ft_putchar('0');
+//	if (args->has_width && args->width == 1 && d != 0)
+//	{
+//		args->has_width = 0;
+//		args->wid = -1;
+//	}
+//	if (!args->has_star_width && args->has_star_prec && args->star_prec < 0 && d == 0)
+//	{
+//		args->res += ft_putchar('0');
+//		return (args->res);
+//	}
+//	if (args->has_prec && args->prec == -1 && d == 0 && args->has_star_width && args->star_width > -1) // pour %*.d -2,0
+//	{
+//		while (args->wid-- > 0)
+//			args->res += ft_putchar(' ');
+//		return (args->res);
+//	}
+//	if ((args->width > 0 || args->star_width > 0) && (args->has_prec || args->has_star_prec) &&
+//			(args->prec == 0 || args->star_prec == 0) && d == 0) // pour %*.*d  -2, 0, 5
+//		// A METTRE DANS UNE FONCTION ET FAIRE UNE FCT CHECK QUI LES REGROUPE TOUTES
+//	{
+//		while (args->wid-- > 0)
+//			args->res += ft_putchar(' ');
+//		return (args->res);
+//	}
+//	if (args->wid < 0)
+//	{
+//		args->wid *= -1;
+//		args->minus = 1;
+//	}
+	if (ft_set_all_args(args, d))
+		return (args->res);
+	tmp = ft_itoa_base(d, base);
+	args->len = ft_strlen(tmp);
+	if (ft_check_full_zero(args, d))
+		return (0);
+	if (ft_check_prec_null_long(args, d))
+		return (0);
+//	if (d < 0)
+//	{
+//		if ((args->len - 1) < args->precision)
+//			args->padding = (args->precision - (args->len - 1));
+//		else
+//			args->padding = 0;
+//	}
+//	else
+//	{
+//		if (args->len < args->precision)
+//			args->padding = (args->precision - args->len);
+//		else
+//			args->padding = 0;
+//	}
+	ft_conv_X_negative(args, d);
+	args->len += args->padding;
+	if (args->zero)
+	{
+	//	if (args->has_prec || args->has_star_prec)
+	//	{
+	//		while ((args->wid - args->len) > 0)
+	//		{
+	//			args->res += ft_putchar(' ');
+	//			args->wid--;
+	//		}
+	//		args->res += ft_put_X_zero(tmp, args);
+	//		return (args->res);
+	//	}
+	//	else
+	//	{
+	//		if (d < 0)
+	//			args->padding = (args->len - 1) < args->wid ? (args->wid - (args->len)) : 0;
+	//		else
+	//			args->padding = args->len < args->wid ? (args->wid - args->len) : 0;
+	//		args->res += ft_put_X_zero(tmp, args);
+	//		return (args->res);
+	//	}
+		if (ft_conv_X_ifzero_ifelse(args, tmp, d))
+			return (args->res);
+	}
+	if (args->minus)
+	{
+	//	args->res += ft_put_X_zero(tmp, args);
+	//	while ((args->wid - args->len) > 0)
+	//	{
+	//		args->res += ft_putchar(' ');
+	//		args->wid--;
+	//	}
+	//	return (args->res);
+		return (ft_conv_X_ifminus(args, tmp));
+	}
+	while ((args->wid - args->len) > 0)
+	{
+		args->res += ft_putchar(' ');
+		args->wid--;
+	}
+	return (args->res + ft_put_x_zero(tmp, args));
+}
+
+
+/*
 
 int		ft_put_x(t_args *args, va_list ap)
 {
@@ -417,9 +536,12 @@ int		ft_put_x(t_args *args, va_list ap)
 	}
 	return (args->res + ft_put_x_zero(tmp, args));
 }
-
+*/
 
 // ----------- sssssssss ------------
+
+
+/*
 int		ft_put_s(t_args *args, va_list ap)
 {
 	char *s;
@@ -466,6 +588,64 @@ int		ft_put_s(t_args *args, va_list ap)
 			}
 			return (args->res);
 		}
+	}
+	return (args->res + ft_putstrl(s, args->len));
+}
+*/
+
+
+
+int		ft_put_s(t_args *args, va_list ap)
+{
+	char *s;
+
+	ft_init_width_prec_starwid_starprec(args);
+	s = va_arg(ap, char *);
+	if (!s)
+		s = "(null)";
+	if (!args->has_width && !args->has_star_width && args->star_prec == 0)
+		return (0);
+	args->len = ft_strlen(s);
+	if (args->has_prec && args->has_star_prec && args->star_prec < 0)
+		return (args->res + ft_putstr(s));
+	if (args->has_prec || args->has_star_prec)
+	{
+		if (args->precision == -1)
+			args->len = 0;
+		else if (args->len > args->precision)
+			args->len = args->precision;
+	}
+//	if (!ft_set_args_s(args, s))
+//		return (0);
+	if (args->minus)
+	{
+	//	args->res += ft_putstrl(s,args->len);
+	//	while ((args->wid - args->len) > 0)
+	//	{
+	//		args->res += ft_putchar(' ');
+	//		args->wid--;
+	//	}
+		ft_if_minus(args, s);
+		return (args->res);
+	}
+	else
+	{
+	//	while ((args->wid - args->len) > 0)
+	//	{
+	//		args->res += ft_putchar(' ');
+	//		args->wid--;
+	//	}
+	//	if (args->has_prec || args->has_star_prec)
+	//	{
+	//		while (*s && args->precision-- > 0)
+	//		{
+	//			args->res += ft_putchar(*s);
+	//			s++;
+	//		}
+	//		return (args->res);
+	//	}
+		if (ft_else_minus(args, s))
+			return (args->res);
 	}
 	return (args->res + ft_putstrl(s, args->len));
 }
