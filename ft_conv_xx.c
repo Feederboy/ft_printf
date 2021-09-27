@@ -12,12 +12,11 @@
 
 #include "ft_printf.h"
 
-int		ft_put_x(t_args *args, va_list ap)
+int	ft_put_x(t_args *args, va_list ap)
 {
-	long d;
-	char *tmp;
-	char *base;
-
+	long	d;
+	char	*tmp;
+	char	*base;
 
 	base = "0123456789abcdef";
 	ft_init_width_prec_starwid_starprec(args);
@@ -36,9 +35,7 @@ int		ft_put_x(t_args *args, va_list ap)
 		if (ft_conv_X_ifzero_ifelse(args, tmp, d))
 			return (args->res);
 	if (args->minus)
-	{
 		return (ft_conv_X_ifminus(args, tmp));
-	}
 	while ((args->wid - args->len) > 0)
 	{
 		args->res += ft_putchar(' ');

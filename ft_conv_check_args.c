@@ -14,8 +14,9 @@
 
 void	ft_set_args_for_specific_tests(t_args *args, int d)
 {
-	if (args->has_width && args->has_prec && d ==0 && (args->prec == -1 || args->prec == 0))
-		args->prec_null = 1; //pour %5.0i et 5.i   avec i = 0
+	if (args->has_width && args->has_prec && d ==0
+		&& (args->prec == -1 || args->prec == 0))
+		args->prec_null = 1;
 	if (args->has_width == -1 && d == 0)
 		args->res += ft_putchar('0');
 	if (args->has_width && args->width == 1 && d != 0)
@@ -27,20 +28,20 @@ void	ft_set_args_for_specific_tests(t_args *args, int d)
 
 int	ft_conv_check_args_putchar_return_res(t_args *args, int d)
 {
-	if (!args->has_star_width && args->has_star_prec && args->star_prec < 0 && d == 0)
+	if (!args->has_star_width && args->has_star_prec
+		&& args->star_prec < 0 && d == 0)
 	{
 		args->res += ft_putchar('0');
 		return (1);
 	}
-	if (args->has_prec && args->prec == -1 && d == 0 && args->has_star_width && args->star_width > -1) // pour %*.d -2,0
+	if (args->has_prec && args->prec == -1 && d == 0 && args->has_star_width && args->star_width > -1)
 	{
 		while (args->wid-- > 0)
 			args->res += ft_putchar(' ');
 		return (1);
 	}
 	if ((args->width > 0 || args->star_width > 0) && (args->has_prec || args->has_star_prec) &&
-			(args->prec == 0 || args->star_prec == 0) && d == 0) // pour %*.*d  -2, 0, 5
-		// A METTRE DANS UNE FONCTION ET FAIRE UNE FCT CHECK QUI LES REGROUPE TOUTES
+			(args->prec == 0 || args->star_prec == 0) && d == 0)
 	{
 		while (args->wid-- > 0)
 			args->res += ft_putchar(' ');

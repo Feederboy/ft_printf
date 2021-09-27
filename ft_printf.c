@@ -14,7 +14,6 @@
 
 char	*read_args(t_args *args, char *itr, va_list ap)
 {
-
 	if (!itr || *itr != '%')
 		return (itr);
 	itr++;
@@ -63,7 +62,7 @@ int	ft_printf(const char *format, ...)
 	char	*itr;
 	t_args	args;
 	va_list	ap;
-	int res;
+	int		res;
 
 	itr = (char *)format;
 	if (!itr)
@@ -84,4 +83,3 @@ int	ft_printf(const char *format, ...)
 	va_end(ap);
 	return (res);
 }
-

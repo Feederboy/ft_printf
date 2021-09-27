@@ -12,9 +12,9 @@
 
 #include "ft_printf.h"
 
-int		ft_put_i_zero(int d, t_args *args)
+int	ft_put_i_zero(int d, t_args *args)
 {
-	int res;
+	int	res;
 
 	res = 0;
 	if (d == -2147483648)
@@ -41,9 +41,9 @@ int		ft_put_i_zero(int d, t_args *args)
 	return (res);
 }
 
-int		ft_put_i(t_args *args, va_list ap)
+int	ft_put_i(t_args *args, va_list ap)
 {
-	int d;
+	int	d;
 
 	ft_init_width_prec_starwid_starprec(args);
 	d = va_arg(ap, int);

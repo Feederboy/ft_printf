@@ -12,42 +12,41 @@
 
 #include "ft_printf.h"
 
-int		ft_conv_u_ifzero_ifelse(t_args *args, unsigned int d)
+int	ft_conv_u_ifzero_ifelse(t_args *args, unsigned int d)
 {
-		if (args->has_prec || args->has_star_prec)
+	if (args->has_prec || args->has_star_prec)
+	{
+		while ((args->wid - args->len) > 0)
 		{
-			while ((args->wid - args->len) > 0)
-			{
-				args->res += ft_putchar(' ');
-				args->wid--;
-			}
-			args->res += ft_put_u_zero(d, args);
-			return (1);
+			args->res += ft_putchar(' ');
+			args->wid--;
+		}
+		args->res += ft_put_u_zero(d, args);
+		return (1);
+	}
+	else
+	{
+		if (d < 0)
+		{
+			if ((args->len - 1) < args->wid)
+				args->padding = (args->wid - args->len);
+			else
+				args->padding = 0;
 		}
 		else
 		{
-			if (d < 0)
-			{
-				if ((args->len - 1) < args->wid)
-					args->padding = (args->wid - args->len);
-				else
-					args->padding = 0;
-			}
+			if (args->len < args->wid)
+				args->padding = (args->wid - args->len);
 			else
-			{
-				if (args->len < args->wid)
-					args->padding = (args->wid - args->len);
-				else
-					args->padding = 0;
-			}
-			args->res += ft_put_u_zero(d, args);
-			return (1);
+				args->padding = 0;
 		}
+		args->res += ft_put_u_zero(d, args);
+		return (1);
+	}
 }
 
-int		ft_conv_u_ifminus(t_args *args, unsigned int d)
+int	ft_conv_u_ifminus(t_args *args, unsigned int d)
 {
-
 	args->res += ft_put_u_zero(d, args);
 	while ((args->wid - args->len) > 0)
 	{
@@ -57,9 +56,9 @@ int		ft_conv_u_ifminus(t_args *args, unsigned int d)
 	return (args->res);
 }
 
-int		ft_put_u_zero(unsigned int d, t_args *args)
+int	ft_put_u_zero(unsigned int d, t_args *args)
 {
-	int res;
+	int	res;
 
 	res =0;
 	if (d == 4294967295)
@@ -80,9 +79,9 @@ int		ft_put_u_zero(unsigned int d, t_args *args)
 	return (res);
 }
 
-int		ft_put_u(t_args *args, va_list ap)
+int	ft_put_u(t_args *args, va_list ap)
 {
-	unsigned int d;
+	unsigned int	d;
 
 	ft_init_width_prec_starwid_starprec(args);
 	d = va_arg(ap, unsigned int);
@@ -102,10 +101,8 @@ int		ft_put_u(t_args *args, va_list ap)
 		args->padding = 0;
 	args->len += args->padding;
 	if (args->zero)
-	{
 		if (ft_conv_u_ifzero_ifelse(args, d))
 			return (args->res);
-	}
 	if (args->minus)
 		return (ft_conv_u_ifminus(args, d));
 	while ((args->wid - args->len) > 0)

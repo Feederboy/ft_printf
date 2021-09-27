@@ -12,9 +12,9 @@
 
 #include "ft_printf.h"
 
-int		ft_put_c(t_args *args, va_list ap)
+int	ft_put_c(t_args *args, va_list ap)
 {
-	int c;
+	int	c;
 
 	c = va_arg(ap, int);
 	ft_init_width_prec_starwid_starprec(args);

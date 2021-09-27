@@ -91,9 +91,9 @@ char	*ft_itoa_base(long n, char *base)
 	return (result);
 }
 
-int		ft_nb_dig(char *str)
+int	ft_nb_dig(char *str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while ((str[i] >= '0' && str[i] <= '9') || str[i] == '-')

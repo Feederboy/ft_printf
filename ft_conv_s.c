@@ -39,7 +39,7 @@ void	ft_if_minus(t_args *args, char *s)
 	}
 }
 
-int		ft_else_minus(t_args *args, char *s)
+int	ft_else_minus(t_args *args, char *s)
 {
 	while ((args->wid - args->len) > 0)
 	{
@@ -58,10 +58,9 @@ int		ft_else_minus(t_args *args, char *s)
 	return (0);
 }
 
-
-int		ft_put_s(t_args *args, va_list ap)
+int	ft_put_s(t_args *args, va_list ap)
 {
-	char *s;
+	char	*s;
 
 	ft_init_width_prec_starwid_starprec(args);
 	s = va_arg(ap, char *);

@@ -30,43 +30,41 @@ void	ft_conv_d_negative(t_args *args, int d)
 	}
 }
 
-
-int		ft_conv_d_ifzero_ifelse(t_args *args, int d)
+int	ft_conv_d_ifzero_ifelse(t_args *args, int d)
 {
-		if (args->has_prec || args->has_star_prec)
+	if (args->has_prec || args->has_star_prec)
+	{
+		while ((args->wid - args->len) > 0)
 		{
-			while ((args->wid - args->len) > 0)
-			{
-				args->res += ft_putchar(' ');
-				args->wid--;
-			}
-			args->res += ft_put_d_zero(d, args);
-			return (1);
+			args->res += ft_putchar(' ');
+			args->wid--;
+		}
+		args->res += ft_put_d_zero(d, args);
+		return (1);
+	}
+	else
+	{
+		if (d < 0)
+		{
+			if ((args->len - 1) < args->wid)
+				args->padding = (args->wid - args->len);
+			else
+				args->padding = 0;
 		}
 		else
 		{
-			if (d < 0)
-			{
-				if ((args->len - 1) < args->wid)
-					args->padding = (args->wid - args->len);
-				else
-					args->padding = 0;
-			}
+			if (args->len < args->wid)
+				args->padding = (args->wid - args->len);
 			else
-			{
-				if (args->len < args->wid)
-					args->padding = (args->wid - args->len);
-				else
-					args->padding = 0;
-			}
-			args->res += ft_put_d_zero(d, args);
-			return (1);
+				args->padding = 0;
 		}
+		args->res += ft_put_d_zero(d, args);
+		return (1);
+	}
 }
 
-int		ft_conv_d_ifminus(t_args *args, int d)
+int	ft_conv_d_ifminus(t_args *args, int d)
 {
-
 	args->res += ft_put_d_zero(d, args);
 	while ((args->wid - args->len) > 0)
 	{
@@ -76,9 +74,9 @@ int		ft_conv_d_ifminus(t_args *args, int d)
 	return (args->res);
 }
 
-int		ft_put_d_zero(int d, t_args *args)
+int	ft_put_d_zero(int d, t_args *args)
 {
-	int res;
+	int	res;
 
 	res = 0;
 	if (d == -2147483648)
@@ -107,9 +105,9 @@ int		ft_put_d_zero(int d, t_args *args)
 	return (res);
 }
 
-int		ft_put_d(t_args *args, va_list ap)
+int	ft_put_d(t_args *args, va_list ap)
 {
-	int d;
+	int	d;
 
 	ft_init_width_prec_starwid_starprec(args);
 	d = va_arg(ap, int);

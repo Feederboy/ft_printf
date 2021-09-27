@@ -36,13 +36,11 @@ void	init_args(t_args *args)
 
 char	*read_minus_zero_minus(t_args *args, char *itr)
 {
-	//minus
 	if (*itr == '-')
 	{
 		args->minus = 1;
 		itr++;
 	}
-	//zero
 	if (*itr == '0')
 	{
 		args->zero = 1;
@@ -50,7 +48,6 @@ char	*read_minus_zero_minus(t_args *args, char *itr)
 			args->zero = 0;
 		itr++;
 	}
-	//minus
 	if (*itr == '-')
 	{
 		args->minus = 1;
@@ -63,8 +60,6 @@ char	*read_minus_zero_minus(t_args *args, char *itr)
 
 char	*read_starwidth_width(t_args *args, char *itr, va_list ap)
 {
-
-	// * width
 	if (*itr == '*')
 	{
 		args->has_star_width = 1;
@@ -78,7 +73,6 @@ char	*read_starwidth_width(t_args *args, char *itr, va_list ap)
 		}
 		itr++;
 	}
-	//width ---- if there's no *width before
 	if (ft_isdigit(*itr))
 	{
 		args->has_width = 1;
@@ -90,13 +84,11 @@ char	*read_starwidth_width(t_args *args, char *itr, va_list ap)
 
 char	*read_prec_starprec_prec(t_args *args, char *itr, va_list ap)
 {
-	//.
 	if (*itr == '.')
 	{
 		args->has_prec = 1;
 		itr++;
 	}
-	// * prec
 	if (*itr == '*')
 	{
 		args->has_star_prec = 1;
@@ -104,12 +96,11 @@ char	*read_prec_starprec_prec(t_args *args, char *itr, va_list ap)
 		args->star_prec = va_arg(ap, int);
 		if (args->star_prec < 0)
 		{
-			args->star_prec = -1;  //SI PREC NEGATIVE ALORS PAS COMPTEE
+			args->star_prec = -1;
 			args->has_star_prec = 0;
 		}
 		itr++;
 	}
-	//prec  --- if there's no *prec before
 	if (ft_isdigit(*itr))
 	{
 		if (args->has_star_prec == 0)
@@ -122,8 +113,6 @@ char	*read_prec_starprec_prec(t_args *args, char *itr, va_list ap)
 	}
 	return (itr);
 }
-
-
 
 void	ft_init_width_prec_starwid_starprec(t_args *args)
 {

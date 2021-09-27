@@ -30,40 +30,40 @@ void	ft_conv_X_negative(t_args *args, long s)
 	}
 }
 
-int		ft_conv_X_ifzero_ifelse(t_args *args, char *tmp, long s)
+int	ft_conv_X_ifzero_ifelse(t_args *args, char *tmp, long s)
 {
-		if (args->has_prec || args->has_star_prec)
+	if (args->has_prec || args->has_star_prec)
+	{
+		while ((args->wid - args->len) > 0)
 		{
-			while ((args->wid - args->len) > 0)
-			{
-				args->res += ft_putchar(' ');
-				args->wid--;
-			}
-			args->res += ft_put_X_zero(tmp, args);
-			return (1);
+			args->res += ft_putchar(' ');
+			args->wid--;
+		}
+		args->res += ft_put_X_zero(tmp, args);
+		return (1);
+	}
+	else
+	{
+		if (s < 0)
+		{
+			if ((args->len - 1) < args->wid)
+				args->padding = (args->wid - args->len);
+			else
+				args->padding = 0;
 		}
 		else
 		{
-			if (s < 0)
-			{
-				if ((args->len - 1) < args->wid)
-					args->padding = (args->wid - args->len);
-				else
-					args->padding = 0;
-			}
+			if (args->len < args->wid)
+				args->padding = (args->wid - args->len);
 			else
-			{
-				if (args->len < args->wid)
-					args->padding = (args->wid - args->len);
-				else
-					args->padding = 0;
-			}
-			args->res += ft_put_X_zero(tmp, args);
-			return (1);
+				args->padding = 0;
 		}
+		args->res += ft_put_X_zero(tmp, args);
+		return (1);
+	}
 }
 
-int		ft_conv_X_ifminus(t_args *args, char *tmp)
+int	ft_conv_X_ifminus(t_args *args, char *tmp)
 {
 	args->res += ft_put_X_zero(tmp, args);
 	while ((args->wid - args->len) > 0)
@@ -74,9 +74,9 @@ int		ft_conv_X_ifminus(t_args *args, char *tmp)
 	return (args->res);
 }
 
-int		ft_put_X_zero(char *str, t_args *args)
+int	ft_put_X_zero(char *str, t_args *args)
 {
-	int res;
+	int	res;
 
 	res = 0;
 	while (args->padding-- > 0)
@@ -88,12 +88,11 @@ int		ft_put_X_zero(char *str, t_args *args)
 	return (res);
 }
 
-int		ft_put_X(t_args *args, va_list ap)
+int	ft_put_X(t_args *args, va_list ap)
 {
-	long d;
-	char *tmp;
-	char *base;
-
+	long	d;
+	char	*tmp;
+	char	*base;
 
 	base = "0123456789ABCDEF";
 	ft_init_width_prec_starwid_starprec(args);
@@ -109,14 +108,10 @@ int		ft_put_X(t_args *args, va_list ap)
 	ft_conv_X_negative(args, d);
 	args->len += args->padding;
 	if (args->zero)
-	{
 		if (ft_conv_X_ifzero_ifelse(args, tmp, d))
 			return (args->res);
-	}
 	if (args->minus)
-	{
 		return (ft_conv_X_ifminus(args, tmp));
-	}
 	while ((args->wid - args->len) > 0)
 	{
 		args->res += ft_putchar(' ');

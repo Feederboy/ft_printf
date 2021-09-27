@@ -40,10 +40,9 @@ void	ft_conv_pct_elsezero(t_args *args)
 	}
 }
 
-int		ft_put_pct(t_args *args, va_list ap)
+int	ft_put_pct(t_args *args, va_list ap)
 {
 	(void)ap;
-
 	if (args->has_width)
 		args->wid = args->width;
 	else
