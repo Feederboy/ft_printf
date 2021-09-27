@@ -6,7 +6,7 @@
 /*   By: matt <maquentr@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 12:08:04 by matt              #+#    #+#             */
-/*   Updated: 2021/09/24 16:57:26 by matt             ###   ########.fr       */
+/*   Updated: 2021/09/27 13:46:35 by matt             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,9 @@ int		ft_conv_X_ifminus(t_args *args, char *tmp);
 int		ft_conv_u_ifzero_ifelse(t_args *args, unsigned int d);
 int		ft_conv_u_ifminus(t_args *args, unsigned int d);
 int		ft_conv_u_ifzero_ifelse(t_args *args, unsigned int d);
+void	ft_conv_pct_ifzero(t_args *args);
+void	ft_conv_pct_ifminus(t_args *args);
+void	ft_conv_pct_elsezero(t_args *args);
 int		ft_set_args_s(t_args *args, char *s);
 void	ft_if_minus(t_args *args, char *s);
 int		ft_else_minus(t_args *args, char *s);

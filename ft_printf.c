@@ -6,7 +6,7 @@
 /*   By: matt <maquentr@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 12:05:52 by matt              #+#    #+#             */
-/*   Updated: 2021/09/24 17:12:56 by matt             ###   ########.fr       */
+/*   Updated: 2021/09/27 14:21:01 by matt             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -307,43 +307,6 @@ int		ft_put_x_zero(char *str, t_args *args)
 	else
 		res += ft_putchar(' ');
 	return (res);
-}
-
-
-int	ft_check_args_put_x(t_args *args, long d)
-{
-	if (args->has_width == -1 && d == 0)
-		args->res += ft_putchar('0');
-	if (args->has_width && args->width == 1 && d != 0)
-	{
-		args->has_width = 0;
-		args->width = -1;
-	}
-	if (!args->has_star_width && args->has_star_prec && args->star_prec < 0 && d == 0)
-	{
-		args->res += ft_putchar('0');
-		return (args->res);
-	}
-	if (args->has_prec && args->prec == -1 && d == 0 && args->has_star_width && args->star_width > -1) // pour %*.d -2,0
-	{
-		while (args->wid-- > 0)
-			args->res += ft_putchar(' ');
-		return (args->res);
-	}
-	if ((args->width > 0 || args->star_width > 0) && (args->has_prec || args->has_star_prec) &&
-			(args->prec == 0 || args->star_prec == 0) && d == 0) // pour %*.*d  -2, 0, 5
-		// A METTRE DANS UNE FONCTION ET FAIRE UNE FCT CHECK QUI LES REGROUPE TOUTES
-	{
-		while (args->wid-- > 0)
-			args->res += ft_putchar(' ');
-		return (args->res);
-	}
-	if (args->wid < 0)
-	{
-		args->wid *= -1;
-		args->minus = 1;
-	}
-	return (0);
 }
 
 
@@ -681,7 +644,6 @@ int		ft_put_c(t_args *args, va_list ap)
 
 // ----------- ppppcccccctttttt ----------
 
-
 int		ft_put_pct(t_args *args, va_list ap)
 {
 	(void)ap;
@@ -690,38 +652,39 @@ int		ft_put_pct(t_args *args, va_list ap)
 		args->wid = args->width;
 	else
 		args->wid = 0;
-	args->res = 0;
 	if (args->minus == 1)
 	{
-		args->res += ft_putchar('%');
-		while (args->wid > 1)
-		{
-			args->res += ft_putchar(' ');
-			args->wid--;
-		}
+	//	args->res += ft_putchar('%');
+	//	while (args->wid > 1)
+	//	{
+	//		args->res += ft_putchar(' ');
+	//		args->wid--;
+	//	}
+		ft_conv_pct_ifminus(args);
 		return (args->res);
 	}
 	else
 	{
 		if (args->zero)
 		{
-			while (args->wid > 1)
-			{
-				args->res += ft_putchar('0');
-				args->wid--;
-			}
+		//	while (args->wid > 1)
+		//	{
+		//		args->res += ft_putchar('0');
+		//		args->wid--;
+		//	}
+			ft_conv_pct_ifzero(args);
 		}
 		else
 		{
-			while (args->wid > 1)
-			{
-				args->res += ft_putchar(' ');
-				args->wid--;
-			}
+		//	while (args->wid > 1)
+		//	{
+		//		args->res += ft_putchar(' ');
+		//		args->wid--;
+		//	}
+			ft_conv_pct_elsezero(args);
 		}
 	}
 	return (args->res + ft_putchar('%'));
-
 }
 
 // ------------ uuuuuuuuu -------------
@@ -1050,88 +1013,94 @@ int		ft_put_i(t_args *args, va_list ap)
 
 	ft_init_width_prec_starwid_starprec(args);
 	d = va_arg(ap, int);
-	if (args->has_width && args->has_prec && d ==0 && (args->prec == -1 || args->prec == 0))
-		args->prec_null = 1; //pour %5.0i et 5.i   avec i = 0
-	if (args->has_width == -1 && d == 0)
-		args->res += ft_putchar('0');
-	if (args->has_width && args->width == 1 && d != 0)
-	{
-		args->has_width = 0;
-		args->width = -1;
-	}
-	if (!args->has_star_width && args->has_star_prec && args->star_prec < 0 && d == 0)
-	{
-		args->res += ft_putchar('0');
+//	if (args->has_width && args->has_prec && d ==0 && (args->prec == -1 || args->prec == 0))
+//		args->prec_null = 1; //pour %5.0i et 5.i   avec i = 0
+//	if (args->has_width == -1 && d == 0)
+//		args->res += ft_putchar('0');
+//	if (args->has_width && args->width == 1 && d != 0)
+//	{
+//		args->has_width = 0;
+//		args->width = -1;
+//	}
+	ft_set_args_for_specific_tests(args, d);
+//	if (!args->has_star_width && args->has_star_prec && args->star_prec < 0 && d == 0)
+//	{
+//		args->res += ft_putchar('0');
+//		return (args->res);
+//	}
+//	if (args->has_prec && args->prec == -1 && d == 0 && args->has_star_width && args->star_width > -1)
+//	{
+//		while (args->wid-- > 0)
+//			args->res += ft_putchar(' ');
+//		return (args->res);
+//	}
+	if (ft_conv_check_args_putchar_return_res(args, d))
 		return (args->res);
-	}
-	if (args->has_prec && args->prec == -1 && d == 0 && args->has_star_width && args->star_width > -1)
-	{
-		while (args->wid-- > 0)
-			args->res += ft_putchar(' ');
-		return (args->res);
-	}
-
 	if (ft_check_full_zero(args, d))
 		return (0);
 	if (ft_check_prec_null_int(args, d))
 		return (0);
 	args->len = ft_nb_digits(d);
-	if (d < 0)
-	{
-		if ((args->len - 1) < args->precision)
-			args->padding = (args->precision - (args->len - 1));
-		else
-			args->padding = 0;
-	}
-	else
-	{
-		if (args->len < args->precision)
-			args->padding = (args->precision - args->len);
-		else
-			args->padding = 0;
-	}
+//	if (d < 0)
+//	{
+//		if ((args->len - 1) < args->precision)
+//			args->padding = (args->precision - (args->len - 1));
+//		else
+//			args->padding = 0;
+//	}
+//	else
+//	{
+//		if (args->len < args->precision)
+//			args->padding = (args->precision - args->len);
+//		else
+//			args->padding = 0;
+//	}
+	ft_conv_d_negative(args, d);
 	args->len += args->padding;
 	if (args->zero)
 	{
-		if (args->has_prec || args->has_star_prec)
-		{
-			while ((args->wid - args->len) > 0)
-			{
-				args->res += ft_putchar(' ');
-				args->wid--;
-			}
-			args->res += ft_put_i_zero(d, args);
+	//	if (args->has_prec || args->has_star_prec)
+	//	{
+	//		while ((args->wid - args->len) > 0)
+	//		{
+	//			args->res += ft_putchar(' ');
+	//			args->wid--;
+	//		}
+	//		args->res += ft_put_i_zero(d, args);
+	//		return (args->res);
+	//	}
+	//	else
+	//	{
+	//		if (d < 0)
+	//		{
+	//			if ((args->len - 1) < args->wid)
+	//				args->padding = (args->wid - args->len);
+	//			else
+	//				args->padding = 0;
+	//		}
+	//		else
+	//		{
+	//			if (args->len < args->wid)
+	//				args->padding = (args->wid - args->len);
+	//			else
+	//				args->padding = 0;
+	//		}
+	//		args->res += ft_put_i_zero(d, args);
+	//		return (args->res);
+	//	}
+		if (ft_conv_d_ifzero_ifelse(args, d))
 			return (args->res);
-		}
-		else
-		{
-			if (d < 0)
-			{
-				if ((args->len - 1) < args->wid)
-					args->padding = (args->wid - args->len);
-				else
-					args->padding = 0;
-			}
-			else
-			{
-				if (args->len < args->wid)
-					args->padding = (args->wid - args->len);
-				else
-					args->padding = 0;
-			}
-			args->res += ft_put_i_zero(d, args);
-			return (args->res);
-		}
 	}
 	if (args->minus)
 	{
-		args->res += ft_put_i_zero(d, args);
-		while ((args->wid - args->len) > 0)
-		{
-			args->res += ft_putchar(' ');
-			args->wid--;
-		}
-		return (args->res);
+	//	args->res += ft_put_i_zero(d, args);
+	//	while ((args->wid - args->len) > 0)
+	//	{
+	//		args->res += ft_putchar(' ');
+	//		args->wid--;
+	//	}
+	//	return (args->res);
+		return (ft_conv_d_ifminus(args, d));
 	}
 	while ((args->wid - args->len) > 0)
 	{
