@@ -60,7 +60,7 @@ int	ft_put_u_zero(unsigned int d, t_args *args)
 {
 	int	res;
 
-	res =0;
+	res = 0;
 	if (d == 4294967295)
 	{
 		while (args->padding-- > 0)

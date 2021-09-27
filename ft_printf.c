@@ -41,7 +41,7 @@ int	ft_put_conv(t_args *args, va_list ap)
 	else if (args->c == 's')
 		return (ft_put_s(args, ap));
 	else if (args->c == 'd')
-		return (ft_put_d(args,ap));
+		return (ft_put_d(args, ap));
 	else if (args->c == 'p')
 		return (ft_put_p(args, ap));
 	else if (args->c == 'i')

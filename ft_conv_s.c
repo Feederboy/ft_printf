@@ -12,7 +12,7 @@
 
 #include "ft_printf.h"
 
-int	ft_set_args_s(t_args *args , char *s)
+int	ft_set_args_s(t_args *args, char *s)
 {
 	if (!args->has_width && !args->has_star_width && args->star_prec == 0)
 		return (0);
@@ -31,7 +31,7 @@ int	ft_set_args_s(t_args *args , char *s)
 
 void	ft_if_minus(t_args *args, char *s)
 {
-	args->res += ft_putstrl(s,args->len);
+	args->res += ft_putstrl(s, args->len);
 	while ((args->wid - args->len) > 0)
 	{
 		args->res += ft_putchar(' ');
