@@ -6,7 +6,7 @@
 /*   By: matt <maquentr@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/24 15:57:47 by matt              #+#    #+#             */
-/*   Updated: 2021/09/24 16:39:02 by matt             ###   ########.fr       */
+/*   Updated: 2021/09/27 17:46:55 by matt             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	ft_setprec_with_X_null(t_args *args)
 		args->prec_null = 1;
 }
 
-int	ft_set_all_args(t_args *args, long d)
+void	ft_init_set_all_args(t_args *args, long d)
 {
 	if (args->has_width == -1 && d == 0)
 		args->res += ft_putchar('0');
@@ -28,6 +28,10 @@ int	ft_set_all_args(t_args *args, long d)
 		args->has_width = 0;
 		args->wid = -1;
 	}
+}
+
+int	ft_set_all_args(t_args *args, long d)
+{
 	if (!args->has_star_width && args->has_star_prec
 		&& args->star_prec < 0 && d == 0)
 	{
