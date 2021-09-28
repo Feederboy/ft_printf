@@ -6,7 +6,7 @@
 /*   By: matt <maquentr@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 12:08:04 by matt              #+#    #+#             */
-/*   Updated: 2021/09/27 23:22:26 by matt             ###   ########.fr       */
+/*   Updated: 2021/09/28 15:00:15 by matt             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,10 +54,12 @@ int		ft_atoi(const char *str);
 int		ft_nb_digits(int d);
 int		ft_nb_digits_unsigned(unsigned int d);
 int		get_nb_size(int base, long long n);
+int		get_nb_size2(int base, uint64_t n);
 char	*ft_strjoin(char *s1, char *s2);
 char	*ft_itoa_base(long n, char *base);
-char	*ft_ultoa_base(long long n, char *base);
+char	*ft_ultoa_base(uint64_t n, char *base);
 void	getnb(char **result, char *base, long long n, int pos);
+void	getnb2(char **result, char *base, uint64_t n, int pos);
 int		ft_nb_dig(char *str);
 
 //CONV
@@ -108,6 +110,7 @@ void	ft_setprec_with_X_null(t_args *args);
 int		ft_set_all_args(t_args *args, long d);
 int		ft_set_all_args_bis(t_args *args, long d);
 int		ft_set_args_regrouped(t_args *args, long d);
+char	*ft_set_prefix(char *str);
 
 //ARGS
 void	init_args(t_args *args);

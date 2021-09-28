@@ -6,7 +6,7 @@
 /*   By: matt <maquentr@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/24 15:22:34 by matt              #+#    #+#             */
-/*   Updated: 2021/09/27 23:28:02 by matt             ###   ########.fr       */
+/*   Updated: 2021/09/28 15:31:41 by matt             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,22 +88,31 @@ int	ft_put_p_zero(char *str, t_args *args)
 	return (res);
 }
 
+char	*ft_set_prefix(char *str)
+{
+	char	*tmp;
+
+	tmp = str;
+	str = ft_strjoin("0x", tmp);
+	free(tmp);
+	if (!str)
+		return (NULL);
+	return (str);
+}
+
 int	ft_put_p(t_args *args, va_list ap)
 {
-	unsigned long	s;
+	uint64_t	s;
 	char	*base;
-	char	*tmp;
 	char	*res;
 
 	ft_init_width_prec_starwid_starprec(args);
 	base = "0123456789abcdef";
-	s = (unsigned long)va_arg(ap, void*);
-	tmp = ft_ultoa_base(s, base);
-	printf("HELLO = %s\n", tmp);
-	if (!tmp)
+	s = (uint64_t)va_arg(ap, void *);
+	res = ft_ultoa_base(s, base);;
+	res = ft_set_prefix(res);
+	if (!res)
 		return (-1);
-	res = ft_strjoin("0x", tmp);
-	free(tmp);
 	if (s == 0 && args->has_prec)
 		res = "0x";
 	args->len = ft_strlen(res);
