@@ -6,7 +6,7 @@
 /*   By: matt <maquentr@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/24 15:22:34 by matt              #+#    #+#             */
-/*   Updated: 2021/09/28 15:31:41 by matt             ###   ########.fr       */
+/*   Updated: 2021/10/01 12:57:48 by matt             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,29 +88,19 @@ int	ft_put_p_zero(char *str, t_args *args)
 	return (res);
 }
 
-char	*ft_set_prefix(char *str)
-{
-	char	*tmp;
-
-	tmp = str;
-	str = ft_strjoin("0x", tmp);
-	free(tmp);
-	if (!str)
-		return (NULL);
-	return (str);
-}
-
 int	ft_put_p(t_args *args, va_list ap)
 {
 	uint64_t	s;
 	char	*base;
 	char	*res;
+	char	*tmp;
 
 	ft_init_width_prec_starwid_starprec(args);
 	base = "0123456789abcdef";
 	s = (uint64_t)va_arg(ap, void *);
-	res = ft_ultoa_base(s, base);;
-	res = ft_set_prefix(res);
+	tmp = ft_ultoa_base(s, base);
+	tmp = ft_set_prefix(tmp);
+	res = tmp;
 	if (!res)
 		return (-1);
 	if (s == 0 && args->has_prec)
@@ -125,12 +115,7 @@ int	ft_put_p(t_args *args, va_list ap)
 			return (args->res);
 	if (args->minus)
 		return (ft_conv_p_ifminus(args, res));
-	while ((args->wid - args->len) > 0)
-	{
-		args->res += ft_putchar(' ');
-		args->wid--;
-	}
+	ft_print_width(args);
 	args->res += ft_put_p_zero(res, args);
-	free(res);
 	return (args->res);
 }

@@ -253,7 +253,7 @@ int main()
 //	ft_printf("FT =[%*.*u], [%*.*x], [%*.*X], [%*.*d]\n", -1, 0, l, -1, 0, l, -1, 0, l, -1, 0, l);
 
 //	printf("\n\n\n");
-
+/*
 	int a = 8;
 	while (a < 12)
 {
@@ -284,5 +284,42 @@ int main()
 	printf("PR =[%p], [%p], [%p], [%p]\n", (void *)-2147483647 - 1, (void *)2147483647, (void *)4294967295, (void *)-4294967295);
 
 	ft_printf("FT =[%p], [%p], [%p], [%p]\n", (void *)-2147483647 - 1, (void *)2147483647, (void *)4294967295, (void *)-4294967295);
+	printf("\n\n\n\n");
+	printf("\n\n\n\n");
+
+	printf("\n\n\n\n");
+	printf("\n\n\n\n");
+
+
+   printf("PR =[%.0xis a big number]\n", 0);
+   ft_printf("FT =[%.0xis a big number]\n", 0);
+
+   printf("PR =[the number is %.0x]\n", 0);
+   ft_printf("FT =[the number is %.0x]\n", 0);
+
+   printf("PR =[the number is %.x]\n", 0);
+   ft_printf("FT =[the number is %.0x]\n", 0);
+   printf("PR =[%xs%.5xi%.0xc%.xp%.9xu]\n", 5, 55, 2, 0, 42);
+   ft_printf("FT =[%xs%.5xi%.0xc%.xp%.9xu]\n", 5, 55, 2, 0, 42);
+
+	printf("\n\n\n\n");
+	printf("\n\n\n\n");
+	printf("\n\n\n\n");
+	printf("\n\n\n\n");
+
+*/
+	printf("PR =[%.X]\n", 0);
+	ft_printf("FT =[%.X]\n", 0);
+	printf("\n\n");
+	printf("PR =[%.x]\n", 0);
+	ft_printf("FT =[%.x]\n", 0);
+
+	printf("\n\n");
+	printf("PR =[%-10.X]\n", 0);
+	ft_printf("FT =[%-10.X]\n", 0);
+
+   printf("PR =%-x\n", 0);
+   ft_printf("FT =%-x\n", 0);
+
 	return (0);
 }

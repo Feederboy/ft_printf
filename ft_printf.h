@@ -6,7 +6,7 @@
 /*   By: matt <maquentr@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 12:08:04 by matt              #+#    #+#             */
-/*   Updated: 2021/09/28 15:00:15 by matt             ###   ########.fr       */
+/*   Updated: 2021/10/01 15:17:23 by matt             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,11 +81,12 @@ void	ft_conv_d_negative(t_args *args, int d);
 void	ft_conv_p_negative(t_args *args, long long s);
 void	ft_conv_X_negative(t_args *args, long s);
 int		ft_conv_d_ifzero_ifelse(t_args *args, int d);
+void	ft_print_width(t_args *args);
 int		ft_conv_p_ifzero_ifelse(t_args *args, char *tmp, long long s);
 int		ft_conv_X_ifzero_ifelse(t_args *args, char *tmp, long s);
 int		ft_conv_d_ifminus(t_args *args, int d);
 int		ft_conv_p_ifminus(t_args *args, char *tmp);
-int		ft_conv_X_ifminus(t_args *args, char *tmp);
+int		ft_conv_X_ifminus(t_args *args, char *tmp, long d);
 int		ft_conv_u_ifzero_ifelse(t_args *args, unsigned int d);
 int		ft_conv_u_ifminus(t_args *args, unsigned int d);
 int		ft_conv_u_ifzero_ifelse(t_args *args, unsigned int d);
@@ -99,6 +100,7 @@ int		ft_else_minus(t_args *args, char *s);
 
 //Checkings
 int		ft_check_full_zero(t_args *args, int d);
+int		ft_check_full_zero_bis(t_args *args, int d, char *res);
 int		ft_check_full_zero_long(t_args *args, long d);
 int		ft_check_prec_null_int(t_args *args, int d);
 int		ft_check_prec_null_long(t_args *args, long d);
