@@ -6,7 +6,7 @@
 /*   By: matt <maquentr@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/24 15:41:04 by matt              #+#    #+#             */
-/*   Updated: 2021/10/01 15:29:01 by matt             ###   ########.fr       */
+/*   Updated: 2021/10/06 12:30:18 by matt             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,15 @@ int	ft_conv_X_ifzero_ifelse(t_args *args, char *tmp, long s)
 {
 	if (args->has_prec || args->has_star_prec)
 	{
+		if (args->wid != 0 && args->has_prec && args->prec == -1 && s == 0)
+		{
+			while ((args->wid + 1 - args->len) > 0)
+			{
+				args->res += ft_putchar(' ');
+				args->wid --;
+			}
+			return (1);
+		}
 		while ((args->wid - args->len) > 0)
 		{
 			args->res += ft_putchar(' ');
@@ -65,10 +74,20 @@ int	ft_conv_X_ifzero_ifelse(t_args *args, char *tmp, long s)
 
 int	ft_conv_X_ifminus(t_args *args, char *tmp, long d)
 {
-	if (d == 0 && args->prec != -1)
+	if (d == 0 && args->has_prec && args->prec == -1 && args->wid != -1)
+	{
+		while ((args->wid + 1 - args->len) > 0)
+		{
+			args->res += ft_putchar(' ');
+			args->wid--;
+		}
+		return (args->res);
+	}
+	if (d == 0 && args->wid == 0 && args->prec == -1)
+		return (args->res += ft_putchar('0'));
+	if (d == 0 && args->prec == -1 && args->has_prec)
 		args->wid += 1;
-	if (d != 0)
-		args->res += ft_put_X_zero(tmp, args);
+	args->res += ft_put_X_zero(tmp, args);
 	while ((args->wid - args->len) > 0)
 	{
 		args->res += ft_putchar(' ');
@@ -93,44 +112,44 @@ int	ft_put_X_zero(char *str, t_args *args)
 
 
 /*
-int	ft_put_X(t_args *args, va_list ap)
-{
-	long	d;
-	char	*tmp;
-	char	*base;
-	char	*res;
+   int	ft_put_X(t_args *args, va_list ap)
+   {
+   long	d;
+   char	*tmp;
+   char	*base;
+   char	*res;
 
-	base = "0123456789ABCDEF";
-	ft_init_width_prec_starwid_starprec(args);
-	d = (long)va_arg(ap, unsigned int);
-	if (ft_set_all_args(args, d))
-		return (args->res);
-	tmp = ft_itoa_base(d, base);
-	if (!tmp)
-		return (-1);
-	res = tmp;
-	args->len = ft_strlen(res);
-	if (ft_check_full_zero(args, d))
-		return (0);
-	if (ft_check_prec_null_long(args, d))
-		return (0);
-	ft_conv_X_negative(args, d);
-	args->len += args->padding;
-	if (args->zero)
-		if (ft_conv_X_ifzero_ifelse(args, res, d))
-			return (args->res);
-	if (args->minus)
-		return (ft_conv_X_ifminus(args, res));
-	while ((args->wid - args->len) > 0)
-	{
-		args->res += ft_putchar(' ');
-		args->wid--;
-	}
-	args->res += ft_put_X_zero(res, args);
-	return (args->res);
-}
+   base = "0123456789ABCDEF";
+   ft_init_width_prec_starwid_starprec(args);
+   d = (long)va_arg(ap, unsigned int);
+   if (ft_set_all_args(args, d))
+   return (args->res);
+   tmp = ft_itoa_base(d, base);
+   if (!tmp)
+   return (-1);
+   res = tmp;
+   args->len = ft_strlen(res);
+   if (ft_check_full_zero(args, d))
+   return (0);
+   if (ft_check_prec_null_long(args, d))
+   return (0);
+   ft_conv_X_negative(args, d);
+   args->len += args->padding;
+   if (args->zero)
+   if (ft_conv_X_ifzero_ifelse(args, res, d))
+   return (args->res);
+   if (args->minus)
+   return (ft_conv_X_ifminus(args, res));
+   while ((args->wid - args->len) > 0)
+   {
+   args->res += ft_putchar(' ');
+   args->wid--;
+   }
+   args->res += ft_put_X_zero(res, args);
+   return (args->res);
+   }
 
-*/
+ */
 
 
 
@@ -146,20 +165,16 @@ int	ft_put_X(t_args *args, va_list ap)
 	if (ft_set_all_args(args, d))
 		return (args->res);
 	res = ft_itoa_base(d, base);
-//	printf("RES = %s\n", res);
 	if (!res)
 		return (-1);
-//	printf("RES2 = %s\n", res);
 	args->len = ft_strlen(res);
 	if (ft_check_full_zero_bis(args, d, res))
 		return (0);
-//	printf("RES3 = %s\n", res);
 	if (ft_check_prec_null_long(args, d))
 	{
 		free(res);
 		return (args->res);
 	}
-//	printf("RES4 = %s\n", res);
 	ft_conv_X_negative(args, d);
 	args->len += args->padding;
 	if (args->zero)
@@ -176,7 +191,6 @@ int	ft_put_X(t_args *args, va_list ap)
 		free(res);
 		return (args->res);
 	}
-	//	return (ft_conv_X_ifminus(args, res));
 	while ((args->wid - args->len) > 0)
 	{
 		args->res += ft_putchar(' ');

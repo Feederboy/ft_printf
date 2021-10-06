@@ -318,8 +318,21 @@ int main()
 	printf("PR =[%-10.X]\n", 0);
 	ft_printf("FT =[%-10.X]\n", 0);
 
-   printf("PR =%-x\n", 0);
-   ft_printf("FT =%-x\n", 0);
+   printf("PR =[%-x]\n", 0);
+   ft_printf("FT =[%-x]\n", 0);
 
+	printf("\n\n");
+   printf("PR =[%-10x]\n", 0);
+   ft_printf("FT =[%-10x]\n", 0);
+
+
+
+	printf("\n\n");
+   printf("PR =[%01.x]\n", 0);
+   ft_printf("FT =[%01.x]\n", 0);
+   printf("PR =[%07.x]\n", 0);
+   ft_printf("FT =[%07.x]\n", 0);
+   printf("PR =[%07.x]\n", 14);
+   ft_printf("FT =[%07.x]\n", 14);
 	return (0);
 }
