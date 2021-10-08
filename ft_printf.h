@@ -6,7 +6,7 @@
 /*   By: matt <maquentr@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 12:08:04 by matt              #+#    #+#             */
-/*   Updated: 2021/10/01 15:17:23 by matt             ###   ########.fr       */
+/*   Updated: 2021/10/08 16:00:11 by matt             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,12 @@ int		ft_conv_d_ifzero_ifelse(t_args *args, int d);
 void	ft_print_width(t_args *args);
 int		ft_conv_p_ifzero_ifelse(t_args *args, char *tmp, long long s);
 int		ft_conv_X_ifzero_ifelse(t_args *args, char *tmp, long s);
+int		ft_conv_X_has_prec(t_args *args, char *tmp, long s);
+void	ft_print_space(t_args *args);
+int		ft_free_and_return(t_args *args, char *res);
+int		ft_return_checks(t_args *args, long d, char **res);
+int		ft_zero_and_minus(t_args *args, char *res, long d);
+int		ft_conv_X_else_prec(t_args *args, char *tmp, long s);
 int		ft_conv_d_ifminus(t_args *args, int d);
 int		ft_conv_p_ifminus(t_args *args, char *tmp);
 int		ft_conv_X_ifminus(t_args *args, char *tmp, long d);
