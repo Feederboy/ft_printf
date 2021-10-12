@@ -6,7 +6,7 @@
 /*   By: matt <maquentr@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/08 15:25:53 by matt              #+#    #+#             */
-/*   Updated: 2021/10/08 15:27:56 by matt             ###   ########.fr       */
+/*   Updated: 2021/10/12 13:15:40 by matt             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,11 @@ int	ft_free_and_return(t_args *args, char *res)
 	return (args->res);
 }
 
+int	ft_free_and_return_bis(t_args *args, char **res)
+{
+	free(res);
+	return (args->res);
+}
 int	ft_conv_X_has_prec(t_args *args, char *tmp, long s)
 {
 	if (args->wid != 0 && args->has_prec && args->prec == -1 && s == 0)

@@ -328,11 +328,7 @@ int main()
 
 
 	printf("\n\n");
-   printf("PR =[%01.x]\n", 0);
-   ft_printf("FT =[%01.x]\n", 0);
-   printf("PR =[%07.x]\n", 0);
-   ft_printf("FT =[%07.x]\n", 0);
-   printf("PR =[%07.x]\n", 14);
-   ft_printf("FT =[%07.x]\n", 14);
+   printf("PR =[%01X]\n", 0);
+   ft_printf("FT =[%01Z]\n", 0);
 	return (0);
 }

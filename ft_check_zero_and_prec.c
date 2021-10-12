@@ -6,7 +6,7 @@
 /*   By: maquentr <maquentr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/06 16:05:50 by maquentr          #+#    #+#             */
-/*   Updated: 2021/10/01 14:24:57 by matt             ###   ########.fr       */
+/*   Updated: 2021/10/12 13:17:01 by matt             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,16 @@ int	ft_check_full_zero(t_args *args, int d){
 }
 
 int	ft_check_full_zero_bis(t_args *args, int d, char *res){
+	if ((args->width == -1 && args->prec == 0 && d == 0)
+		|| (!args->star_width && !args->star_prec && d == 0)
+		|| (args->star_prec == 0 && d == 0))
+	{
+		free(res);
+		return (1);
+	}
+	return (0);
+}
+int	ft_check_full_zero_bis_bis(t_args *args, int d, char **res){
 	if ((args->width == -1 && args->prec == 0 && d == 0)
 		|| (!args->star_width && !args->star_prec && d == 0)
 		|| (args->star_prec == 0 && d == 0))

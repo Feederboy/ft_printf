@@ -6,7 +6,7 @@
 /*   By: matt <maquentr@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/24 15:41:04 by matt              #+#    #+#             */
-/*   Updated: 2021/10/08 16:07:07 by matt             ###   ########.fr       */
+/*   Updated: 2021/10/12 16:30:39 by matt             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,18 @@ int	ft_conv_X_ifzero_ifelse(t_args *args, char *tmp, long s)
 		return (ft_conv_X_has_prec(args, tmp, s));
 	else
 		return (ft_conv_X_else_prec(args, tmp, s));
+}
+
+int	ft_conv_X_ifzero_ifelse_bis(t_args *args, char *tmp, long s)
+{
+	(void)tmp;
+	(void)s;
+
+	if (args->has_prec || args->has_star_prec)
+		return (0);
+	else
+		return (1);
+	return (2);
 }
 
 int	ft_conv_X_ifminus(t_args *args, char *tmp, long d)
@@ -78,19 +90,43 @@ int	ft_put_X_zero(char *str, t_args *args)
 	return (res);
 }
 
-int ft_return_checks(t_args *args, long d, char **res)
+int ft_return_checks(t_args *args, long d)
 {
-	if (ft_check_full_zero_bis(args, d, *res))
+	if (ft_check_full_zero(args, d))
 		return (0);
 	if (ft_check_prec_null_long(args, d))
-		return (ft_free_and_return(args, *res));
+		return (1);
+	return (2);
+}
+int ft_return_checks_bis(t_args *args, long d, char *res)
+{
+	if (ft_check_full_zero(args, d))
+	{
+		free(res);
+		return (0);
+	}
+	if (ft_check_prec_null_long(args, d))
+		return (ft_free_and_return(args, res));
+	return (2);
+}
+
+int	ft_zero_and_minus_bis(t_args *args, char *res, long d)
+{
+	if (args->zero)
+		if (ft_conv_X_ifzero_ifelse(args, res, d))
+			return (0);
+	if (args->minus)
+	{
+		args->res = ft_conv_X_ifminus(args, res, d);
+		return (1);
+	}
 	return (2);
 }
 
 int	ft_zero_and_minus(t_args *args, char *res, long d)
 {
 	if (args->zero)
-		if (ft_conv_X_ifzero_ifelse(args, res, d))
+		if (ft_conv_X_ifzero_ifelse_bis(args, res, d))
 			return (ft_free_and_return(args, res));
 	if (args->minus)
 	{
@@ -99,7 +135,6 @@ int	ft_zero_and_minus(t_args *args, char *res, long d)
 	}
 	return (2);
 }
-
 
 int	ft_put_X(t_args *args, va_list ap)
 {
@@ -116,20 +151,20 @@ int	ft_put_X(t_args *args, va_list ap)
 	if (!res)
 		return (-1);
 	args->len = ft_strlen(res);
-	if (ft_check_full_zero_bis(args, d, res))
-		return (0);
-	if (ft_check_prec_null_long(args, d))
-		return (ft_free_and_return(args, res));
+	if (ft_return_checks(args, d) != 2)
+		return (ft_return_checks_bis(args, d, res));
 	ft_conv_X_negative(args, d);
 	args->len += args->padding;
-	if (args->zero)
-		if (ft_conv_X_ifzero_ifelse(args, res, d))
-			return (ft_free_and_return(args, res));
-	if (args->minus)
-	{
-		args->res = ft_conv_X_ifminus(args, res, d);
-		return (ft_free_and_return(args, res));
-	}
+	if (ft_zero_and_minus_bis(args, res, d) != 2)
+		return (ft_zero_and_minus(args, res, d));
+//	if (args->zero)
+//		if (ft_conv_X_ifzero_ifelse(args, res, d))
+//			return (ft_free_and_return(args, res));
+//	if (args->minus)
+//	{
+//		args->res = ft_conv_X_ifminus(args, res, d);
+//		return (ft_free_and_return(args, res));
+//	}
 	ft_print_space(args);
 	args->res += ft_put_X_zero(res, args);
 	return (ft_free_and_return(args, res));
