@@ -6,7 +6,7 @@
 /*   By: matt <maquentr@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/24 15:41:04 by matt              #+#    #+#             */
-/*   Updated: 2021/10/12 16:30:39 by matt             ###   ########.fr       */
+/*   Updated: 2021/10/12 17:22:49 by matt             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,14 +30,28 @@ void	ft_conv_X_negative(t_args *args, long s)
 	}
 }
 
+//LEAKS LORS DE 0 AVEC PRECISION ET LE ARGS->RES RETURNED EST ERRRONE
+//
+//
+//
+///
+//
+////
+////
 
 
 int	ft_conv_X_ifzero_ifelse(t_args *args, char *tmp, long s)
 {
 	if (args->has_prec || args->has_star_prec)
+	{
+//		printf("TROIS\n");
 		return (ft_conv_X_has_prec(args, tmp, s));
+	}
 	else
+	{
+//		printf("QUATRE\n");
 		return (ft_conv_X_else_prec(args, tmp, s));
+	}
 }
 
 int	ft_conv_X_ifzero_ifelse_bis(t_args *args, char *tmp, long s)
@@ -46,9 +60,15 @@ int	ft_conv_X_ifzero_ifelse_bis(t_args *args, char *tmp, long s)
 	(void)s;
 
 	if (args->has_prec || args->has_star_prec)
+	{
+//		printf("UN\n");
 		return (0);
+	}
 	else
+	{
+//		printf("DEUX\n");
 		return (1);
+	}
 	return (2);
 }
 
@@ -117,7 +137,6 @@ int	ft_zero_and_minus_bis(t_args *args, char *res, long d)
 			return (0);
 	if (args->minus)
 	{
-		args->res = ft_conv_X_ifminus(args, res, d);
 		return (1);
 	}
 	return (2);
