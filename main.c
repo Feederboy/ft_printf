@@ -308,33 +308,15 @@ int main()
 	printf("\n\n\n\n");
 
 */
-	printf("PR =[%.X]\n", 0);
-	ft_printf("FT =[%.X]\n", 0);
-	printf("\n\n");
-	printf("PR =[%.x]\n", 0);
-	ft_printf("FT =[%.x]\n", 0);
-
-	printf("\n\n");
-	printf("PR =[%-10.X]\n", 0);
-	ft_printf("FT =[%-10.X]\n", 0);
-
-   printf("PR =[%-x]\n", 0);
-   ft_printf("FT =[%-x]\n", 0);
-
-	printf("\n\n");
-   printf("PR =[%-10x]\n", 0);
-   ft_printf("FT =[%-10x]\n", 0);
+	printf("PR =[%--4s %s %------------------9s of %s of %-5s]\n", "for", "the", "goooood", "aaall", "us");
+	ft_printf("FT =[%--4s %s %------------------9s of %s of %-5s]\n", "for", "the", "goooood", "aaall", "us");
 
 
+	printf("\n\n\n\n");
+	
+	printf("PR =[%-*.*X]\n", 0, 2, 0);
+	ft_printf("FT =[%-*.*X]\n", 0, 2, 0);
 
-	printf("TTTTTTTEEEEEEEEEEST\n\n");
-   printf("PR =[%01X]\n", 0);
-   ft_printf("FT =[%01X]\n", 0);
-	printf("\n\n");
-   printf("PR =[%010X]\n", 42);
-   ft_printf("FT =[%010X]\n", 42);
-	printf("\n\n");
-   printf("PR =[%01.X]\n", 0);
-   ft_printf("FT =[%01.X]\n", 0 );
+
 	return (0);
 }

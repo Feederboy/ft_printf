@@ -6,7 +6,7 @@
 /*   By: maquentr <maquentr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/06 16:24:37 by maquentr          #+#    #+#             */
-/*   Updated: 2021/09/06 16:57:58 by maquentr         ###   ########.fr       */
+/*   Updated: 2021/11/08 15:52:02 by matt             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,8 @@ char	*read_minus_zero_minus(t_args *args, char *itr)
 	if (*itr == '-')
 	{
 		args->minus = 1;
-		itr++;
+		while (*itr == '-')
+			itr++;
 	}
 	if (*itr == '0')
 	{
@@ -53,7 +54,8 @@ char	*read_minus_zero_minus(t_args *args, char *itr)
 		args->minus = 1;
 		if (args->zero)
 			args->zero = 0;
-		itr++;
+		while (*itr == '-')
+			itr++;
 	}
 	return (itr);
 }
