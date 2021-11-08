@@ -246,14 +246,14 @@ int main()
 		}
 		a++;
 	}
-
-	printf("\n\n-------------------------------------\n\n\n");
 */
+/*
+	printf("\n\n-------------------------------------\n\n\n");
 //	printf("PR =[%*.*u], [%*.*x], [%*.*X], [%*.*d]\n", -1, 0, l, -1, 0, l, -1, 0, l, -1, 0, l);
 //	ft_printf("FT =[%*.*u], [%*.*x], [%*.*X], [%*.*d]\n", -1, 0, l, -1, 0, l, -1, 0, l, -1, 0, l);
 
 //	printf("\n\n\n");
-/*
+
 	int a = 8;
 	while (a < 12)
 {
@@ -306,8 +306,6 @@ int main()
 	printf("\n\n\n\n");
 	printf("\n\n\n\n");
 	printf("\n\n\n\n");
-
-*/
 	printf("PR =[%--4s %s %------------------9s of %s of %-5s]\n", "for", "the", "goooood", "aaall", "us");
 	ft_printf("FT =[%--4s %s %------------------9s of %s of %-5s]\n", "for", "the", "goooood", "aaall", "us");
 
@@ -317,6 +315,17 @@ int main()
 	printf("PR =[%-*.*X]\n", 0, 2, 0);
 	ft_printf("FT =[%-*.*X]\n", 0, 2, 0);
 
+	printf("\n\n\n\n");
+	printf("PR =[%-*p]\n", 8, (void *)209590960);
+	ft_printf("FT =[%-*p]\n", 8, (void *)209590960);
+*/
+	int a = 8;
+	while (a < 42)
+{
 
+	printf("PR=[%-*p], [%-*x], [%-*p], [%-*x], [%-*p], [%-*x], [%-*p], [%-*x]\n", a, (void *)209590960, a, 209590960, a, (void *)207038912, a, 207038912, a, (void *)1, a, 1, a, NULL, a, 0);
+	ft_printf("FT=[%-*p], [%-*x], [%-*p], [%-*x], [%-*p], [%-*x], [%-*p], [%-*x]\n", a, (void *)209590960, a, 209590960, a, (void *)207038912, a, 207038912, a, (void *)1, a, 1, a, NULL, a, 0);
+	a++;
+}
 	return (0);
 }
