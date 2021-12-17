@@ -6,7 +6,7 @@
 /*   By: maquentr <maquentr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/06 16:05:50 by maquentr          #+#    #+#             */
-/*   Updated: 2021/10/12 13:17:01 by matt             ###   ########.fr       */
+/*   Updated: 2021/11/29 15:32:57 by matt             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,13 +52,6 @@ int	ft_check_prec_null_int(t_args *args, int d)
 {
 	if (!args->has_width && !args->has_star_width
 		&& args->has_prec == 1 && args->prec == -1 && d == 0)
-		return (1);
-	return (0);
-}
-
-int	ft_check_prec_null_long(t_args *args, long d)
-{
-	if (!args->has_width && args->has_prec == 1 && args->prec == -1 && d == 0)
 		return (1);
 	return (0);
 }

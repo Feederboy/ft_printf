@@ -6,7 +6,7 @@
 /*   By: matt <maquentr@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 14:45:15 by matt              #+#    #+#             */
-/*   Updated: 2021/11/08 17:32:19 by matt             ###   ########.fr       */
+/*   Updated: 2021/11/29 15:46:15 by matt             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ int	ft_conv_X_ifminus(t_args *args, char *tmp, long d)
 {
 	if (d == 0 && args->has_prec && args->prec == -1 && args->wid != -1)
 	{
-//		printf("7\n");
 		while ((args->wid + 1 - args->len) > 0)
 		{
 			args->res += ft_putchar(' ');
@@ -63,13 +62,9 @@ int	ft_conv_X_ifminus(t_args *args, char *tmp, long d)
 		return (args->res);
 	}
 	if (d == 0 && args->wid == 0 && args->precision == -1)
-	{
-//		printf("8\n");
 		return (args->res += ft_putchar('0'));
-	}
 	if (d == 0 && args->prec == -1 && args->has_prec)
 		args->wid += 1;
-//	printf("9\n");
 	args->res += ft_put_X_zero(tmp, args);
 	while ((args->wid - args->len) > 0)
 	{
