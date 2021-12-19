@@ -6,7 +6,7 @@
 /*   By: matt <maquentr@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 12:05:52 by matt              #+#    #+#             */
-/*   Updated: 2021/09/27 15:48:25 by matt             ###   ########.fr       */
+/*   Updated: 2021/12/19 11:38:04 by maquentr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ char	*read_args(t_args *args, char *itr, va_list ap)
 		itr = read_minus_zero_minus(args, itr);
 		itr = read_starwidth_width(args, itr, ap);
 		itr = read_prec_starprec_prec(args, itr, ap);
+		itr = read_digit(args, itr);
 		if (ft_strchr("cspdiuxX%", *itr))
 		{
 			args->c = *itr;
@@ -51,7 +52,7 @@ int	ft_put_conv(t_args *args, va_list ap)
 	else if (args->c == 'x')
 		return (ft_put_x(args, ap));
 	else if (args->c == 'X')
-		return (ft_put_X(args, ap));
+		return (ft_put_big_x(args, ap));
 	else if (args->c == '%')
 		return (ft_put_pct(args, ap));
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: matt <maquentr@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/08 15:25:53 by matt              #+#    #+#             */
-/*   Updated: 2021/11/08 14:10:42 by matt             ###   ########.fr       */
+/*   Updated: 2021/12/19 12:20:21 by maquentr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,8 @@ int	ft_free_and_return_bis(t_args *args, char **res)
 	free(res);
 	return (args->res);
 }
-int	ft_conv_X_has_prec(t_args *args, char *tmp, long s)
+
+int	ft_conv_x_has_prec(t_args *args, char *tmp, long s)
 {
 	if (args->wid != 0 && args->has_prec && args->prec == -1 && s == 0)
 	{
@@ -48,11 +49,11 @@ int	ft_conv_X_has_prec(t_args *args, char *tmp, long s)
 		args->res += ft_putchar(' ');
 		args->wid--;
 	}
-	args->res += ft_put_X_zero(tmp, args);
+	args->res += ft_put_x_zero(tmp, args);
 	return (1);
 }
 
-int	ft_conv_X_else_prec(t_args *args, char *tmp, long s)
+int	ft_conv_x_else_prec(t_args *args, char *tmp, long s)
 {
 	if (s < 0)
 	{
@@ -68,6 +69,6 @@ int	ft_conv_X_else_prec(t_args *args, char *tmp, long s)
 		else
 			args->padding = 0;
 	}
-	args->res += ft_put_X_zero(tmp, args);
+	args->res += ft_put_x_zero(tmp, args);
 	return (1);
 }

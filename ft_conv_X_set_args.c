@@ -6,13 +6,13 @@
 /*   By: matt <maquentr@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/24 15:57:47 by matt              #+#    #+#             */
-/*   Updated: 2021/09/27 17:46:55 by matt             ###   ########.fr       */
+/*   Updated: 2021/12/19 11:55:09 by maquentr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	ft_setprec_with_X_null(t_args *args)
+void	ft_setprec_with_x_null(t_args *args)
 {
 	if (args->has_width && args->has_prec
 		&& (args->prec == -1 || args->prec == 0))
@@ -53,10 +53,15 @@ int	ft_set_all_args(t_args *args, long d)
 			args->res += ft_putchar(' ');
 		return (1);
 	}
+	ft_set_all_args_bis(args);
+	return (0);
+}
+
+void	ft_set_all_args_bis(t_args *args)
+{
 	if (args->wid < 0)
 	{
 		args->wid *= -1;
 		args->minus = 1;
 	}
-	return (0);
 }

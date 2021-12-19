@@ -6,7 +6,7 @@
 /*   By: maquentr <maquentr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/06 16:24:37 by maquentr          #+#    #+#             */
-/*   Updated: 2021/11/08 15:52:02 by matt             ###   ########.fr       */
+/*   Updated: 2021/12/19 11:36:40 by maquentr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,16 +102,6 @@ char	*read_prec_starprec_prec(t_args *args, char *itr, va_list ap)
 			args->has_star_prec = 0;
 		}
 		itr++;
-	}
-	if (ft_isdigit(*itr))
-	{
-		if (args->has_star_prec == 0)
-		{
-			args->prec = ft_atoi(itr);
-			itr += ft_nb_dig(itr);
-		}
-		else
-			itr += ft_nb_digits(ft_atoi(itr));
 	}
 	return (itr);
 }

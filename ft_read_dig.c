@@ -1,34 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_conv_p_bis.c                                    :+:      :+:    :+:   */
+/*   ft_read_dig.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matt <maquentr@student.42.fr>              +#+  +:+       +#+        */
+/*   By: maquentr <maquentr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/01 12:01:48 by matt              #+#    #+#             */
-/*   Updated: 2021/12/19 12:42:52 by maquentr         ###   ########.fr       */
+/*   Created: 2021/12/19 11:34:52 by maquentr          #+#    #+#             */
+/*   Updated: 2021/12/19 11:36:39 by maquentr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-char	*ft_set_prefix(char *str)
+char	*read_digit(t_args *args, char *itr)
 {
-	char	*tmp;
-
-	tmp = str;
-	str = ft_strjoin("0x", tmp);
-	free(tmp);
-	if (!str)
-		return (NULL);
-	return (str);
-}
-
-void	ft_print_width(t_args *args)
-{
-	while ((args->wid - args->len) > 0)
+	if (ft_isdigit(*itr))
 	{
-		args->res += ft_putchar(' ');
-		args->wid--;
+		if (args->has_star_prec == 0)
+		{
+			args->prec = ft_atoi(itr);
+			itr += ft_nb_dig(itr);
+		}
+		else
+			itr += ft_nb_digits(ft_atoi(itr));
 	}
+	return (itr);
 }

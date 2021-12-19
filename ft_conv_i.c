@@ -6,7 +6,7 @@
 /*   By: matt <maquentr@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/27 15:45:34 by matt              #+#    #+#             */
-/*   Updated: 2021/09/27 15:47:15 by matt             ###   ########.fr       */
+/*   Updated: 2021/12/19 11:56:56 by maquentr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,10 +64,6 @@ int	ft_put_i(t_args *args, va_list ap)
 	}
 	if (args->minus)
 		return (ft_conv_d_ifminus(args, d));
-	while ((args->wid - args->len) > 0)
-	{
-		args->res += ft_putchar(' ');
-		args->wid--;
-	}
+	ft_print_space(args);
 	return (args->res + ft_put_i_zero(d, args));
 }

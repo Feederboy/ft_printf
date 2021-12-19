@@ -6,7 +6,7 @@
 /*   By: matt <maquentr@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/27 22:56:26 by matt              #+#    #+#             */
-/*   Updated: 2021/09/28 15:32:23 by matt             ###   ########.fr       */
+/*   Updated: 2021/12/19 12:48:11 by maquentr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	get_nb_size2(int base, uint64_t n)
 	return (size);
 }
 
-char			*ft_ultoa_base(uint64_t n, char *base)
+char	*ft_ultoa_base(uint64_t n, char *base)
 {
 	char		*result;
 	int			size;

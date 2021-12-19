@@ -6,12 +6,11 @@
 /*   By: matt <maquentr@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 15:31:58 by matt              #+#    #+#             */
-/*   Updated: 2021/11/29 15:33:01 by matt             ###   ########.fr       */
+/*   Updated: 2021/12/19 10:24:35 by maquentr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-
 
 int	ft_check_prec_null_long(t_args *args, long d)
 {

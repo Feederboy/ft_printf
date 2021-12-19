@@ -6,7 +6,7 @@
 /*   By: matt <maquentr@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/21 16:24:36 by matt              #+#    #+#             */
-/*   Updated: 2021/09/27 15:42:07 by matt             ###   ########.fr       */
+/*   Updated: 2021/12/19 11:28:42 by maquentr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,20 +26,7 @@ int	ft_conv_u_ifzero_ifelse(t_args *args, unsigned int d)
 	}
 	else
 	{
-		if (d < 0)
-		{
-			if ((args->len - 1) < args->wid)
-				args->padding = (args->wid - args->len);
-			else
-				args->padding = 0;
-		}
-		else
-		{
-			if (args->len < args->wid)
-				args->padding = (args->wid - args->len);
-			else
-				args->padding = 0;
-		}
+		ft_conv_u_ifelse_bis(d, args);
 		args->res += ft_put_u_zero(d, args);
 		return (1);
 	}
@@ -79,6 +66,17 @@ int	ft_put_u_zero(unsigned int d, t_args *args)
 	return (res);
 }
 
+int	ft_put_u_checks(t_args *args, unsigned int d)
+{
+	if (args->has_width == -1 && d == 0)
+		args->res += ft_putchar('0');
+	if (ft_check_full_zero(args, d))
+		return (0);
+	if (ft_check_prec_null_int(args, d))
+		return (0);
+	return (1);
+}
+
 int	ft_put_u(t_args *args, va_list ap)
 {
 	unsigned int	d;
@@ -88,11 +86,7 @@ int	ft_put_u(t_args *args, va_list ap)
 	ft_set_args_for_specific_tests(args, d);
 	if (ft_conv_check_args_putchar_return_res(args, d))
 		return (args->res);
-	if (args->has_width == -1 && d == 0)
-		args->res += ft_putchar('0');
-	if (ft_check_full_zero(args, d))
-		return (0);
-	if (ft_check_prec_null_int(args, d))
+	if (ft_put_u_checks(args, d) == 0)
 		return (0);
 	args->len = ft_nb_digits_unsigned(d);
 	if (args->len < args->precision)
@@ -105,10 +99,6 @@ int	ft_put_u(t_args *args, va_list ap)
 			return (args->res);
 	if (args->minus)
 		return (ft_conv_u_ifminus(args, d));
-	while ((args->wid - args->len) > 0)
-	{
-		args->res += ft_putchar(' ');
-		args->wid--;
-	}
+	ft_print_space(args);
 	return (args->res + ft_put_u_zero(d, args));
 }

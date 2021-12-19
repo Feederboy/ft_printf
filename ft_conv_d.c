@@ -6,7 +6,7 @@
 /*   By: matt <maquentr@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/21 16:13:00 by matt              #+#    #+#             */
-/*   Updated: 2021/09/27 15:44:06 by matt             ###   ########.fr       */
+/*   Updated: 2021/12/19 12:17:52 by maquentr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,20 +44,7 @@ int	ft_conv_d_ifzero_ifelse(t_args *args, int d)
 	}
 	else
 	{
-		if (d < 0)
-		{
-			if ((args->len - 1) < args->wid)
-				args->padding = (args->wid - args->len);
-			else
-				args->padding = 0;
-		}
-		else
-		{
-			if (args->len < args->wid)
-				args->padding = (args->wid - args->len);
-			else
-				args->padding = 0;
-		}
+		ft_conv_d_ifzero_else(args, d);
 		args->res += ft_put_d_zero(d, args);
 		return (1);
 	}
@@ -99,9 +86,7 @@ int	ft_put_d_zero(int d, t_args *args)
 	if (args->prec_null == 0)
 		res += ft_putchar((d % 10) + '0');
 	else
-	{
 		res += ft_putchar(' ');
-	}
 	return (res);
 }
 

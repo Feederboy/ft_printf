@@ -6,13 +6,13 @@
 /*   By: matt <maquentr@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 14:45:15 by matt              #+#    #+#             */
-/*   Updated: 2021/11/29 15:46:15 by matt             ###   ########.fr       */
+/*   Updated: 2021/12/19 11:53:59 by maquentr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	ft_conv_X_negative(t_args *args, long s)
+void	ft_conv_x_negative(t_args *args, long s)
 {
 	if (s < 0)
 	{
@@ -30,19 +30,18 @@ void	ft_conv_X_negative(t_args *args, long s)
 	}
 }
 
-int	ft_conv_X_ifzero_ifelse(t_args *args, char *tmp, long s)
+int	ft_conv_x_ifzero_ifelse(t_args *args, char *tmp, long s)
 {
 	if (args->has_prec || args->has_star_prec)
-		return (ft_conv_X_has_prec(args, tmp, s));
+		return (ft_conv_x_has_prec(args, tmp, s));
 	else
-		return (ft_conv_X_else_prec(args, tmp, s));
+		return (ft_conv_x_else_prec(args, tmp, s));
 }
 
-int	ft_conv_X_ifzero_ifelse_bis(t_args *args, char *tmp, long s)
+int	ft_conv_x_ifzero_ifelse_bis(t_args *args, char *tmp, long s)
 {
 	(void)tmp;
 	(void)s;
-
 	if (args->has_prec || args->has_star_prec)
 		return (0);
 	else
@@ -50,7 +49,7 @@ int	ft_conv_X_ifzero_ifelse_bis(t_args *args, char *tmp, long s)
 	return (2);
 }
 
-int	ft_conv_X_ifminus(t_args *args, char *tmp, long d)
+int	ft_conv_x_ifminus(t_args *args, char *tmp, long d)
 {
 	if (d == 0 && args->has_prec && args->prec == -1 && args->wid != -1)
 	{
@@ -65,7 +64,7 @@ int	ft_conv_X_ifminus(t_args *args, char *tmp, long d)
 		return (args->res += ft_putchar('0'));
 	if (d == 0 && args->prec == -1 && args->has_prec)
 		args->wid += 1;
-	args->res += ft_put_X_zero(tmp, args);
+	args->res += ft_put_x_zero(tmp, args);
 	while ((args->wid - args->len) > 0)
 	{
 		args->res += ft_putchar(' ');
@@ -74,7 +73,7 @@ int	ft_conv_X_ifminus(t_args *args, char *tmp, long d)
 	return (args->res);
 }
 
-int	ft_put_X_zero(char *str, t_args *args)
+int	ft_put_x_zero(char *str, t_args *args)
 {
 	int	res;
 

@@ -6,7 +6,7 @@
 /*   By: matt <maquentr@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/24 16:49:13 by matt              #+#    #+#             */
-/*   Updated: 2021/11/08 15:52:30 by matt             ###   ########.fr       */
+/*   Updated: 2021/12/19 11:21:20 by maquentr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,17 @@ int	ft_else_minus(t_args *args, char *s)
 	return (0);
 }
 
+void	ft_has_prec_has_star_prec(t_args *args)
+{
+	if (args->has_prec || args->has_star_prec)
+	{
+		if (args->precision == -1)
+			args->len = 0;
+		else if (args->len > args->precision)
+			args->len = args->precision;
+	}
+}
+
 int	ft_put_s(t_args *args, va_list ap)
 {
 	char	*s;
@@ -71,13 +82,7 @@ int	ft_put_s(t_args *args, va_list ap)
 	args->len = ft_strlen(s);
 	if (args->has_prec && args->has_star_prec && args->star_prec < 0)
 		return (args->res + ft_putstr(s));
-	if (args->has_prec || args->has_star_prec)
-	{
-		if (args->precision == -1)
-			args->len = 0;
-		else if (args->len > args->precision)
-			args->len = args->precision;
-	}
+	ft_has_prec_has_star_prec(args);
 	if (args->minus)
 	{
 		ft_if_minus(args, s);
